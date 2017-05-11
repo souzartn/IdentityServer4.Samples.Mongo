@@ -132,7 +132,7 @@ namespace QuickstartIdentityServer
             // If it's a new Repository (database), need to restart the website to configure Mongo to ignore Extra Elements.
             if (createdNewRepository)
             {
-                var newRepositoryMsg = $"Mongo Repository created/populated! Please restart you website to configure Mongo to ignore Extra Elements.";
+                var newRepositoryMsg = $"Mongo Repository created/populated! Please restart you website, so Mongo driver will be configured  to ignore Extra Elements.";
                 throw new Exception(newRepositoryMsg);
             }
         }

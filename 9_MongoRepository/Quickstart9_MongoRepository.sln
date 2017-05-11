@@ -1,26 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2408EC7B-2E06-46A5-B6AC-D4E985E30CBB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DFF21B2A-7F52-448D-8867-D1C4EEAF73A7}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "QuickstartIdentityServer", "src\QuickstartIdentityServer\QuickstartIdentityServer.xproj", "{74894537-E514-4087-B6E1-B9D77A2ED34C}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Api", "src\Api\Api.xproj", "{7059F655-BBD7-4CA3-9A76-2FF198996DA8}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Client", "src\Client\Client.xproj", "{B707F1AF-DD46-45D6-B4C5-BC2E9A3FB9B7}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ResourceOwnerClient", "src\ResourceOwnerClient\ResourceOwnerClient.xproj", "{40674C67-6A97-4B85-8154-92AEC74A37A0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{BABF1C97-CB5C-4AC5-81C6-6A81B0D45E27}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MvcClient", "src\MvcClient\MvcClient.xproj", "{4CFB4883-9929-4814-BE22-2E19476CE4A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickstartIdentityServer", "src\QuickstartIdentityServer\QuickstartIdentityServer.csproj", "{74894537-E514-4087-B6E1-B9D77A2ED34C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "src\Api\Api.csproj", "{7059F655-BBD7-4CA3-9A76-2FF198996DA8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "src\Client\Client.csproj", "{B707F1AF-DD46-45D6-B4C5-BC2E9A3FB9B7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResourceOwnerClient", "src\ResourceOwnerClient\ResourceOwnerClient.csproj", "{40674C67-6A97-4B85-8154-92AEC74A37A0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcClient", "src\MvcClient\MvcClient.csproj", "{4CFB4883-9929-4814-BE22-2E19476CE4A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,11 +50,11 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{BABF1C97-CB5C-4AC5-81C6-6A81B0D45E27} = {2408EC7B-2E06-46A5-B6AC-D4E985E30CBB}
 		{74894537-E514-4087-B6E1-B9D77A2ED34C} = {2408EC7B-2E06-46A5-B6AC-D4E985E30CBB}
 		{7059F655-BBD7-4CA3-9A76-2FF198996DA8} = {2408EC7B-2E06-46A5-B6AC-D4E985E30CBB}
 		{B707F1AF-DD46-45D6-B4C5-BC2E9A3FB9B7} = {BABF1C97-CB5C-4AC5-81C6-6A81B0D45E27}
 		{40674C67-6A97-4B85-8154-92AEC74A37A0} = {BABF1C97-CB5C-4AC5-81C6-6A81B0D45E27}
-		{BABF1C97-CB5C-4AC5-81C6-6A81B0D45E27} = {2408EC7B-2E06-46A5-B6AC-D4E985E30CBB}
 		{4CFB4883-9929-4814-BE22-2E19476CE4A3} = {BABF1C97-CB5C-4AC5-81C6-6A81B0D45E27}
 	EndGlobalSection
 EndGlobal
