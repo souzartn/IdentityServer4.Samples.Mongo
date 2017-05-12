@@ -36,6 +36,7 @@
     <PackageReference Include="MongoDB.Bson" Version="2.4.2" />
     <PackageReference Include="MongoDB.Driver" Version="2.4.2" />
     <PackageReference Include="MongoDB.Driver.Core" Version="2.4.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.MongoDB" Version="1.0.2" />
   </ItemGroup>
 
 </Project>
