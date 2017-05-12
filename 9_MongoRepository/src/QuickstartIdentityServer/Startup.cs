@@ -70,7 +70,8 @@ namespace QuickstartIdentityServer
             app.UseDeveloperExceptionPage();
 
             app.UseIdentityServer();
-
+            app.UseIdentity();
+            app.UseMongoDbForIdentityServer();
             app.UseGoogleAuthentication(new GoogleOptions
             {
                 AuthenticationScheme = "Google",
@@ -81,7 +82,7 @@ namespace QuickstartIdentityServer
                 ClientSecret = "3gcoTrEDPPJ0ukn_aYYT6PWo"
             });
 
-            app.UseMongoDbForIdentityServer();
+            
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }
