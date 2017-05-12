@@ -47,8 +47,7 @@ namespace QuickstartIdentityServer
             //User Mongodb for Asp.net identity in order to get users stored.
             var client = new MongoClient(Configuration["MongoConnection"]);
             var db = client.GetDatabase(Configuration["MongoDatabaseName"]);
-            services.AddMongoDbForAspIdentity<IdentityUser, IdentityRole>(db)
-                .AddDefaultTokenProviders();
+            services.AddMongoDbForAspIdentity<IdentityUser, IdentityRole>(db);
 
             // Dependency Injection - Register the IConfigurationRoot instance mapping to our "ConfigurationOptions" class 
             services.Configure<ConfigurationOptions>(Configuration);
@@ -69,8 +68,10 @@ namespace QuickstartIdentityServer
             loggerFactory.AddConsole(LogLevel.Debug);
             app.UseDeveloperExceptionPage();
 
-            app.UseIdentityServer();
             app.UseIdentity();
+            
+            app.UseIdentityServer();
+            
             app.UseMongoDbForIdentityServer();
             app.UseGoogleAuthentication(new GoogleOptions
             {
