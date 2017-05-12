@@ -46,7 +46,7 @@ namespace QuickstartIdentityServer
 
             //User Mongodb for Asp.net identity in order to get users stored.
             var client = new MongoClient(Configuration["MongoConnection"]);
-            var db = client.GetDatabase(Configuration["identity4db"]);
+            var db = client.GetDatabase(Configuration["MongoDatabaseName"]);
             services.AddMongoDbForAspIdentity<IdentityUser, IdentityRole>(db)
                 .AddDefaultTokenProviders();
 
