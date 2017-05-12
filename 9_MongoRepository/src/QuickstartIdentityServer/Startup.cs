@@ -1,5 +1,6 @@
 ﻿using System;
 using IdentityServer4;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.MongoDB;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using QuickstartIdentityServer.Quickstart.Extension;
+using Serilog;
 
 namespace QuickstartIdentityServer
 {
@@ -34,6 +36,7 @@ namespace QuickstartIdentityServer
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IProfileService, ProfileService>();
             services.AddMvc();
 
             // ---  configure identity server with in-memory stores, keys, clients and scopes ---
@@ -60,18 +63,28 @@ namespace QuickstartIdentityServer
                 .AddClients()
                 .AddIdentityApiResources()
                 .AddPersistedGrants()
-                .AddTestUsers(Config.GetUsers());
+                .AddTestUsers(Config.GetUsers())
+                .AddProfileService<ProfileService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            var serilog = new LoggerConfiguration()
+                .MinimumLevel.Verbose()
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .WriteTo.File(@"d:\tempidentityserver4_log.txt");
+
+            loggerFactory
+                .AddSerilog(serilog.CreateLogger());
+
             loggerFactory.AddConsole(LogLevel.Debug);
             app.UseDeveloperExceptionPage();
 
             app.UseIdentity();
-            
+
             app.UseIdentityServer();
-            
+
             app.UseMongoDbForIdentityServer();
             app.UseGoogleAuthentication(new GoogleOptions
             {
@@ -83,7 +96,7 @@ namespace QuickstartIdentityServer
                 ClientSecret = "3gcoTrEDPPJ0ukn_aYYT6PWo"
             });
 
-            
+
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }

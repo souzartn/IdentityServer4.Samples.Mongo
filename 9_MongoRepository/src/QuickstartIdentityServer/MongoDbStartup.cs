@@ -1,5 +1,6 @@
 ﻿using System;
 using IdentityServer4.Models;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.MongoDB;
@@ -23,6 +24,7 @@ namespace QuickstartIdentityServer
         public static IdentityBuilder AddMongoDbForAspIdentity<TIdentity, TRole>(this IServiceCollection services,
             IMongoDatabase database) where TIdentity : IdentityUser where TRole : IdentityRole
         {
+            
             services.AddSingleton<IUserStore<TIdentity>>(x =>
             {
                 var usersCollection = database.GetCollection<TIdentity>("Identity_Users");
@@ -101,7 +103,7 @@ namespace QuickstartIdentityServer
                 throw new Exception(newRepositoryMsg);
             }
 
-            
+
 
             // --- The following will do the initial DB population (If needed / first time) ---
             InitializeDatabase(app);

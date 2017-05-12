@@ -277,7 +277,7 @@ namespace IdentityServer4.Quickstart.UI
                 userId = temp.Id;
             }
             
-            var result = await _signInManager.ExternalLoginSignInAsync(provider, userIdClaim.Value, false);
+            var result = await _signInManager.ExternalLoginSignInAsync(provider, userIdClaim.Value, true);
 
             // check if the external user is already provisioned
             IdentityUser user;
@@ -285,7 +285,8 @@ namespace IdentityServer4.Quickstart.UI
             {
                 // this sample simply auto-provisions new external user
                 // another common approach is to start a registrations workflow first
-                user = new IdentityUser() { UserName = email, Email = email, };
+                user = new IdentityUser() { UserName = email, Email = email,LockoutEnabled = false};
+                
 
                 foreach (var claim in claims)
                 {
