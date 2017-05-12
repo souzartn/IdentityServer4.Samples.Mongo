@@ -81,6 +81,7 @@ namespace QuickstartIdentityServer
                 ClientSecret = "3gcoTrEDPPJ0ukn_aYYT6PWo"
             });
 
+            app.UseMongoDbForIdentityServer();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }

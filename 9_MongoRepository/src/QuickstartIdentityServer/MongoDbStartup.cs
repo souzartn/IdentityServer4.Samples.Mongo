@@ -56,6 +56,9 @@ namespace QuickstartIdentityServer
         /// ]]></remarks>
         public static void UseMongoDbForIdentityServer(this IApplicationBuilder app)
         {
+            // --- Configure Classes to ignore Extra Elements (e.g. _Id) when deserializing ---
+            ConfigureMongoDriver2IgnoreExtraElements();
+
             var createdNewRepository = false;
             var repository = app.ApplicationServices.GetService<IRepository>();
 
@@ -98,8 +101,7 @@ namespace QuickstartIdentityServer
                 throw new Exception(newRepositoryMsg);
             }
 
-            // --- Configure Classes to ignore Extra Elements (e.g. _Id) when deserializing ---
-            ConfigureMongoDriver2IgnoreExtraElements();
+            
 
             // --- The following will do the initial DB population (If needed / first time) ---
             InitializeDatabase(app);
