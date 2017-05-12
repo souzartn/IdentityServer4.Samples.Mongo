@@ -270,7 +270,14 @@ namespace IdentityServer4.Quickstart.UI
             var provider = info.Properties.Items["scheme"];
             var userId = userIdClaim.Value;
 
-            var result = await _signInManager.ExternalLoginSignInAsync(provider, userId, false);
+            var temp = await _userManager.FindByEmailAsync(email);
+
+            if (temp != null)
+            {
+                userId = temp.Id;
+            }
+            
+            var result = await _signInManager.ExternalLoginSignInAsync(provider, userIdClaim.Value, false);
 
             // check if the external user is already provisioned
             IdentityUser user;
@@ -285,8 +292,10 @@ namespace IdentityServer4.Quickstart.UI
                     user.Claims.Add(new IdentityUserClaim(claim));
                 }
 
-                var newUser = await _userManager.CreateAsync(user);
+                var Userresult = await _userManager.CreateAsync(user);
                 
+                var loginResult = await _userManager.AddLoginAsync(user,
+                    new ExternalLoginInfo(info.Principal, provider, userIdClaim.Value, userName));
 
             }
             else
@@ -313,7 +322,7 @@ namespace IdentityServer4.Quickstart.UI
             }
 
             // issue authentication cookie for user
-            await HttpContext.Authentication.SignInAsync(user.Id, user.UserName, provider, props,
+            await HttpContext.Authentication.SignInAsync(userIdClaim.Value, user.UserName, provider, props,
                 additionalClaims.ToArray());
 
             // delete temporary cookie used during external authentication
