@@ -84,11 +84,7 @@ namespace QuickstartIdentityServer
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
 
-            // --- Configure Classes to ignore Extra Elements (e.g. _Id) when deserializing ---
-            ConfigureMongoDriver2IgnoreExtraElements();
-
-            // --- The following will do the initial DB population (If needed / first time) ---
-            InitializeDatabase(app);
+           
 
         }
 
