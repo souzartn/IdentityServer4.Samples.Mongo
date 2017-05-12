@@ -278,7 +278,7 @@ namespace IdentityServer4.Quickstart.UI
             {
                 // this sample simply auto-provisions new external user
                 // another common approach is to start a registrations workflow first
-                user = new IdentityUser() { UserName = userName, Email = email, };
+                user = new IdentityUser() { UserName = email, Email = email, };
 
                 foreach (var claim in claims)
                 {
@@ -286,6 +286,8 @@ namespace IdentityServer4.Quickstart.UI
                 }
 
                 var newUser = await _userManager.CreateAsync(user);
+                
+
             }
             else
             {
