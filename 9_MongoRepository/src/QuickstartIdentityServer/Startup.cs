@@ -1,23 +1,18 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
-
+﻿using System;
 using IdentityServer4;
-using IdentityServer4.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.MongoDB;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using MongoDB.Bson.Serialization;
+using MongoDB.Driver;
 using QuickstartIdentityServer.Quickstart.Extension;
-using QuickstartIdentityServer.Quickstart.Interface;
-using System;
 
 namespace QuickstartIdentityServer
 {
     public class Startup
     {
-
         public IConfigurationRoot Configuration { get; }
 
 
@@ -49,9 +44,15 @@ namespace QuickstartIdentityServer
             //    .AddInMemoryClients(Config.GetClients())
             //    .AddTestUsers(Config.GetUsers());
 
+            //User Mongodb for Asp.net identity in order to get users stored.
+            var client = new MongoClient(Configuration["MongoConnection"]);
+            var db = client.GetDatabase(Configuration["identity4db"]);
+            services.AddMongoDbForAspIdentity<IdentityUser, IdentityRole>(db)
+                .AddDefaultTokenProviders();
 
             // Dependency Injection - Register the IConfigurationRoot instance mapping to our "ConfigurationOptions" class 
             services.Configure<ConfigurationOptions>(Configuration);
+
 
             // ---  configure identity server with MONGO Repository for stores, keys, clients and scopes ---
             services.AddIdentityServer()
@@ -65,7 +66,6 @@ namespace QuickstartIdentityServer
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-
             loggerFactory.AddConsole(LogLevel.Debug);
             app.UseDeveloperExceptionPage();
 
@@ -83,13 +83,6 @@ namespace QuickstartIdentityServer
 
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
-
-           
-
         }
-
-
-     
-
     }
 }
