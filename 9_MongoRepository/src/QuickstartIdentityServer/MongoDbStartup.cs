@@ -99,7 +99,7 @@ namespace QuickstartIdentityServer
             if (createdNewRepository)
             {
                 var newRepositoryMsg =
-                    $"Mongo Repository created/populated! Please restart you website, so Mongo driver will be configured  to ignore Extra Elements.";
+                    $"Mongo Repository created/populated! Please restart your website, so Mongo driver will be configured  to ignore Extra Elements.";
                 throw new Exception(newRepositoryMsg);
             }
 
@@ -177,7 +177,7 @@ namespace QuickstartIdentityServer
             if (createdNewRepository)
             {
                 var newRepositoryMsg =
-                    $"Mongo Repository created/populated! Please restart you website, so Mongo driver will be configured  to ignore Extra Elements.";
+                    $"Mongo Repository created/populated! Please restart your website, so Mongo driver will be configured  to ignore Extra Elements.";
                 throw new Exception(newRepositoryMsg);
             }
         }

@@ -22,9 +22,6 @@ namespace QuickstartIdentityServer.Quickstart.Extension
         }
 
 
-       
-        
-
         /// <summary>
         /// Configure ClientId / Secrets
         /// </summary>

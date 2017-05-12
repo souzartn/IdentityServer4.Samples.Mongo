@@ -18,7 +18,7 @@ namespace QuickstartIdentityServer
         public IConfigurationRoot Configuration { get; }
 
 
-        public Startup(IHostingEnvironment env)
+        public Startup(ILoggerFactory loggerFactory, IHostingEnvironment env)
         {
             var environmentVar = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             if (environmentVar == null)
@@ -31,6 +31,18 @@ namespace QuickstartIdentityServer
                 .AddJsonFile($"appsettings.{environmentVar}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            //--- Configure Serilog ---
+            var serilog = new LoggerConfiguration()
+                                .ReadFrom.Configuration(Configuration);
+
+            loggerFactory.WithFilter(new FilterLoggerSettings
+                        {
+                            { "IdentityServer", LogLevel.Error },
+                            { "Microsoft", LogLevel.Error },
+                            { "System", LogLevel.Error },
+                        })
+                        .AddSerilog(serilog.CreateLogger());
         }
 
 
@@ -38,6 +50,10 @@ namespace QuickstartIdentityServer
         {
             services.AddSingleton<IProfileService, ProfileService>();
             services.AddMvc();
+
+            // Dependency Injection - Register the IConfigurationRoot instance mapping to our "ConfigurationOptions" class 
+            services.Configure<ConfigurationOptions>(Configuration);
+
 
             // ---  configure identity server with in-memory stores, keys, clients and scopes ---
             //services.AddIdentityServer()
@@ -47,17 +63,27 @@ namespace QuickstartIdentityServer
             //    .AddInMemoryClients(Config.GetClients())
             //    .AddTestUsers(Config.GetUsers());
 
+
             //User Mongodb for Asp.net identity in order to get users stored.
-            var client = new MongoClient(Configuration["MongoConnection"]);
-            var db = client.GetDatabase(Configuration["MongoDatabaseName"]);
+            //    Using an instance of ConfigurationOptions (Dependency Injection)
+            var configurationOptions = Configuration.Get<ConfigurationOptions>();
+            var client = new MongoClient(configurationOptions.MongoConnection);  //new MongoClient(Configuration["MongoConnection"]);
+            var db = client.GetDatabase(configurationOptions.MongoDatabaseName);  //client.GetDatabase(Configuration["MongoDatabaseName"]);
             services.AddMongoDbForAspIdentity<IdentityUser, IdentityRole>(db);
 
-            // Dependency Injection - Register the IConfigurationRoot instance mapping to our "ConfigurationOptions" class 
-            services.Configure<ConfigurationOptions>(Configuration);
+          
 
 
             // ---  configure identity server with MONGO Repository for stores, keys, clients and scopes ---
-            services.AddIdentityServer()
+            services.AddIdentityServer(
+                    // Enable IdentityServer events for logging capture - Events are not turned on by default
+                    options =>
+                    {
+                        options.Events.RaiseSuccessEvents = true;
+                        options.Events.RaiseFailureEvents = true;
+                        options.Events.RaiseErrorEvents = true;
+                    }
+                )
                 .AddTemporarySigningCredential()
                 .AddMongoRepository()
                 .AddClients()
