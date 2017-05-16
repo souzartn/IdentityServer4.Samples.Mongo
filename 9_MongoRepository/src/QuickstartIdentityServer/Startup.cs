@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Identity.MongoDB;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using MongoDB.Driver;
 using QuickstartIdentityServer.Quickstart.Extension;
 using Serilog;
 
@@ -59,22 +58,13 @@ namespace QuickstartIdentityServer
             //services.AddIdentityServer()
             //    .AddTemporarySigningCredential()
             //    .AddInMemoryIdentityResources(Config.GetIdentityResources())
-            //    .AddInMemoryApiResources(Config.GetApiResources())
+            //    .AddInMemoryApiResources(Config.GetApiResources()) 
             //    .AddInMemoryClients(Config.GetClients())
             //    .AddTestUsers(Config.GetUsers());
 
 
-            //User Mongodb for Asp.net identity in order to get users stored.
-            //    Using an instance of ConfigurationOptions (Dependency Injection)
-            var configurationOptions = Configuration.Get<ConfigurationOptions>();
-            var client = new MongoClient(configurationOptions.MongoConnection);  //new MongoClient(Configuration["MongoConnection"]);
-            var db = client.GetDatabase(configurationOptions.MongoDatabaseName);  //client.GetDatabase(Configuration["MongoDatabaseName"]);
-            services.AddMongoDbForAspIdentity<IdentityUser, IdentityRole>(db);
 
-          
-
-
-            // ---  configure identity server with MONGO Repository for stores, keys, clients and scopes ---
+            // ---  configure identity server with MONGO Repository for stores, keys, clients, scopes & Asp .Net Identity  ---
             services.AddIdentityServer(
                     // Enable IdentityServer events for logging capture - Events are not turned on by default
                     options =>
@@ -86,6 +76,7 @@ namespace QuickstartIdentityServer
                 )
                 .AddTemporarySigningCredential()
                 .AddMongoRepository()
+                .AddMongoDbForAspIdentity<IdentityUser, IdentityRole>(Configuration)
                 .AddClients()
                 .AddIdentityApiResources()
                 .AddPersistedGrants()
@@ -95,23 +86,17 @@ namespace QuickstartIdentityServer
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            var serilog = new LoggerConfiguration()
-                .MinimumLevel.Verbose()
-                .Enrich.FromLogContext()
-                .WriteTo.Console()
-                .WriteTo.File(@"d:\tempidentityserver4_log.txt");
-
-            loggerFactory
-                .AddSerilog(serilog.CreateLogger());
-
+          
             loggerFactory.AddConsole(LogLevel.Debug);
+            
+            Log.Information("IdentityServer4.Configure was executed...");
+
             app.UseDeveloperExceptionPage();
-
-            app.UseIdentity();
-
+            app.AddIdentity();
             app.UseIdentityServer();
-
             app.UseMongoDbForIdentityServer();
+
+
             app.UseGoogleAuthentication(new GoogleOptions
             {
                 AuthenticationScheme = "Google",
@@ -125,6 +110,7 @@ namespace QuickstartIdentityServer
 
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
+
         }
     }
 }

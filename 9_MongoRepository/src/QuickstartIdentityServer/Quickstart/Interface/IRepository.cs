@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using MongoDB.Driver;
 
 namespace QuickstartIdentityServer.Quickstart.Interface
 {
@@ -11,6 +12,7 @@ namespace QuickstartIdentityServer.Quickstart.Interface
     /// </summary>
     public interface IRepository
     {
+        IMongoDatabase GetDatabase();
         System.Linq.IQueryable<T> All<T>() where T : class, new();
         IQueryable<T> Where<T>(System.Linq.Expressions.Expression<Func<T, bool>> expression) where T : class, new();
         T Single<T>(Expression<Func<T, bool>> expression) where T : class, new();

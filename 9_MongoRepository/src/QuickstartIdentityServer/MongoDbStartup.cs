@@ -4,6 +4,7 @@ using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.MongoDB;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
@@ -13,40 +14,8 @@ namespace QuickstartIdentityServer
 {
     public static class MongoDbStartup
     {
-        /// <summary>
-        /// Adds mongodb implementation for the asp identity part (saving user and roles)
-        /// </summary>
-        /// <remarks><![CDATA[
-        /// Contains implemenations for
-        /// - IUserStore<T>
-        /// - IRoleStore<T>
-        /// ]]></remarks>
-        public static IdentityBuilder AddMongoDbForAspIdentity<TIdentity, TRole>(this IServiceCollection services,
-            IMongoDatabase database) where TIdentity : IdentityUser where TRole : IdentityRole
-        {
-            
-            services.AddSingleton<IUserStore<TIdentity>>(x =>
-            {
-                var usersCollection = database.GetCollection<TIdentity>("Identity_Users");
-
-                IndexChecks.EnsureUniqueIndexOnNormalizedEmail(usersCollection);
-                IndexChecks.EnsureUniqueIndexOnNormalizedUserName(usersCollection);
-
-                return new UserStore<TIdentity>(usersCollection);
-            });
-
-            services.AddSingleton<IRoleStore<TRole>>(x =>
-            {
-                var rolesCollection = database.GetCollection<TRole>("Identity_Roles");
-
-                IndexChecks.EnsureUniqueIndexOnNormalizedRoleName(rolesCollection);
-
-                return new RoleStore<TRole>(rolesCollection);
-            });
-
-            return services.AddIdentity<TIdentity, TRole>();
-        }
-
+        private static string  _newRepositoryMsg = $"Mongo Repository created/populated! Please restart your website, so Mongo driver will be configured  to ignore Extra Elements.";
+      
         /// <summary>
         /// Adds the support for MongoDb Persistance for all identityserver stored
         /// </summary>
@@ -58,11 +27,14 @@ namespace QuickstartIdentityServer
         /// ]]></remarks>
         public static void UseMongoDbForIdentityServer(this IApplicationBuilder app)
         {
+            //Resolve Repository with ASP .NET Core DI help 
+            var repository = app.ApplicationServices.GetService<IRepository>();
+
             // --- Configure Classes to ignore Extra Elements (e.g. _Id) when deserializing ---
             ConfigureMongoDriver2IgnoreExtraElements();
 
             var createdNewRepository = false;
-            var repository = app.ApplicationServices.GetService<IRepository>();
+
 
             //  --Client
             if (!repository.CollectionExists<Client>())
@@ -98,15 +70,11 @@ namespace QuickstartIdentityServer
             // If it's a new Repository (database), need to restart the website to configure Mongo to ignore Extra Elements.
             if (createdNewRepository)
             {
-                var newRepositoryMsg =
-                    $"Mongo Repository created/populated! Please restart your website, so Mongo driver will be configured  to ignore Extra Elements.";
-                throw new Exception(newRepositoryMsg);
+                 throw new Exception(_newRepositoryMsg);
             }
 
-
-
             // --- The following will do the initial DB population (If needed / first time) ---
-            InitializeDatabase(app);
+            InitializeDatabase( repository);
         }
 
         /// <summary>
@@ -137,10 +105,9 @@ namespace QuickstartIdentityServer
             });
         }
 
-        private static void InitializeDatabase(IApplicationBuilder app)
+        private static  void InitializeDatabase(IRepository repository)
         {
             var createdNewRepository = false;
-            var repository = app.ApplicationServices.GetService<IRepository>();
 
             //  --Client
             if (!repository.CollectionExists<Client>())
@@ -176,9 +143,7 @@ namespace QuickstartIdentityServer
             // If it's a new Repository (database), need to restart the website to configure Mongo to ignore Extra Elements.
             if (createdNewRepository)
             {
-                var newRepositoryMsg =
-                    $"Mongo Repository created/populated! Please restart your website, so Mongo driver will be configured  to ignore Extra Elements.";
-                throw new Exception(newRepositoryMsg);
+                throw new Exception(_newRepositoryMsg);
             }
         }
     }

@@ -20,6 +20,7 @@ namespace QuickstartIdentityServer.Quickstart.Repository
         protected static IMongoClient _client;
         protected static IMongoDatabase _database;
 
+        
         /// <summary>
         /// This Contructor leverages  .NET Core built-in DI
         /// </summary>
@@ -33,7 +34,14 @@ namespace QuickstartIdentityServer.Quickstart.Repository
             
         }
 
-        
+        /// <summary>
+        /// Get Database connection
+        /// </summary>
+        /// <returns></returns>
+        public IMongoDatabase GetDatabase()
+        {
+            return _database;
+        }
 
         public IQueryable<T> All<T>() where T : class, new()
         {
