@@ -57,6 +57,8 @@ namespace QuickstartIdentityServer.Quickstart.Extension
                 IndexChecks.EnsureUniqueIndexOnNormalizedRoleName(rolesCollection);
                 return new RoleStore<TRole>(rolesCollection);
             });
+            builder.Services.AddIdentity<TIdentity, TRole>();
+
 
             return builder;
         }

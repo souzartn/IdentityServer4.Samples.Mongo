@@ -92,9 +92,10 @@ namespace QuickstartIdentityServer
             Log.Information("IdentityServer4.Configure was executed...");
 
             app.UseDeveloperExceptionPage();
-            app.AddIdentity();
+
             app.UseIdentityServer();
             app.UseMongoDbForIdentityServer();
+            app.UseIdentity();
 
 
             app.UseGoogleAuthentication(new GoogleOptions
