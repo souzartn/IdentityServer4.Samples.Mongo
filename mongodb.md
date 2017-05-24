@@ -1,8 +1,5 @@
-# IdentityServer4 with  MongoDB configuration 
 
-This project is based on [IdentityServer4.quickstart.samples](https://github.com/IdentityServer/IdentityServer4.Samples) and aims to shows how to use MongoDB for the configuration data.
-
-#### Configuring Mongo 
+## Configuring Mongo 
 For simplicity we recommend to try to use MongoDB locally first, 
 so you will be able to have this sample running in no time. 
 If you do NOT wish to run mongo locally, it is just a matter of adjusting

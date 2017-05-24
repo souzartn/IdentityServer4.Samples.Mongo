@@ -1,4 +1,4 @@
-#### First execution 
+## Running samples from Visual Studio
 Make sure you have multiple projects selected to startup - "QuickstartIdentityServer", "Api" and any desired client (e.g. Clients\MvcClient) before executing solution from Visual Studio.
 
 <img src="./images/SetStartupProjects_menu.jpg" alt="Set Startup menu">
