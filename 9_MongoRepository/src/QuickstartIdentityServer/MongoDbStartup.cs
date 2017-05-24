@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using IdentityModel;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
@@ -15,7 +17,7 @@ namespace QuickstartIdentityServer
     public static class MongoDbStartup
     {
         private static string  _newRepositoryMsg = $"Mongo Repository created/populated! Please restart your website, so Mongo driver will be configured  to ignore Extra Elements.";
-      
+
         /// <summary>
         /// Adds the support for MongoDb Persistance for all identityserver stored
         /// </summary>
@@ -29,6 +31,9 @@ namespace QuickstartIdentityServer
         {
             //Resolve Repository with ASP .NET Core DI help 
             var repository = app.ApplicationServices.GetService<IRepository>();
+
+            //Resolve ASP .NET Core Identity with DI help
+            var userManager= app.ApplicationServices.GetService<UserManager<IdentityUser>>();
 
             // --- Configure Classes to ignore Extra Elements (e.g. _Id) when deserializing ---
             ConfigureMongoDriver2IgnoreExtraElements();
@@ -67,14 +72,20 @@ namespace QuickstartIdentityServer
                 createdNewRepository = true;
             }
 
+
+            //Populate MongoDB with dummy users to enable test - e.g. Bob, Alice
+            if (createdNewRepository==true)
+            {
+                AddSampleUsersToMongo(userManager);
+            }
+           
+
             // If it's a new Repository (database), need to restart the website to configure Mongo to ignore Extra Elements.
             if (createdNewRepository)
             {
                  throw new Exception(_newRepositoryMsg);
             }
 
-            // --- The following will do the initial DB population (If needed / first time) ---
-            InitializeDatabase( repository);
         }
 
         /// <summary>
@@ -105,46 +116,48 @@ namespace QuickstartIdentityServer
             });
         }
 
-        private static  void InitializeDatabase(IRepository repository)
+        /// <summary>
+        /// Populate MongoDB with a List of Dummy users to enable tests - e.g. Alice, Bob
+        ///   see Config.GetSampleUsers() for details.
+        /// </summary>
+        /// <param name="userManager"></param>
+        private static void  AddSampleUsersToMongo(UserManager<IdentityUser> userManager)
         {
-            var createdNewRepository = false;
+            var dummyUsers = Config.GetSampleUsers();
 
-            //  --Client
-            if (!repository.CollectionExists<Client>())
+            foreach (var usrDummy in dummyUsers)
             {
-                foreach (var client in Config.GetClients())
+                var userDummyEmail = usrDummy.Claims.FirstOrDefault(c => c.Type == JwtClaimTypes.Email);
+
+                if (userDummyEmail == null)
                 {
-                    repository.Add(client);
+                    throw new Exception("Could not locate user email from  claims!");
                 }
-                createdNewRepository = true;
-            }
 
-            //  --IdentityResource
-            if (!repository.CollectionExists<IdentityResource>())
-            {
-                foreach (var res in Config.GetIdentityResources())
+
+                var user = new IdentityUser() {
+                    UserName = usrDummy.Username,
+                    LockoutEnabled = false,
+                    EmailConfirmed = true,
+                    Email = userDummyEmail.Value,
+                    NormalizedEmail = userDummyEmail.Value
+                };
+
+                
+
+                foreach (var claim in usrDummy.Claims)
                 {
-                    repository.Add(res);
+                    user.AddClaim(claim);
                 }
-                createdNewRepository = true;
-            }
-
-
-            //  --ApiResource
-            if (!repository.CollectionExists<ApiResource>())
-            {
-                foreach (var api in Config.GetApiResources())
+                var result =  userManager.CreateAsync(user, usrDummy.Password);
+                if (!result.Result.Succeeded)
                 {
-                    repository.Add(api);
+                    // If we got an error, Make sure to drop all collections from Mongo before trying again. Otherwise sample users will NOT be populated
+                    var errorList = result.Result.Errors.ToArray();
+                    throw new Exception($"Error Adding sample users to MongoDB! Make sure to drop all collections from Mongo before trying again!");
                 }
-                createdNewRepository = true;
             }
-
-            // If it's a new Repository (database), need to restart the website to configure Mongo to ignore Extra Elements.
-            if (createdNewRepository)
-            {
-                throw new Exception(_newRepositoryMsg);
-            }
+            return;
         }
     }
 }

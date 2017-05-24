@@ -42,6 +42,8 @@ namespace QuickstartIdentityServer.Quickstart.Extension
             var client = new MongoClient(configurationOptions.MongoConnection);
             var database = client.GetDatabase(configurationOptions.MongoDatabaseName);
 
+
+
             // Configure Asp Net Core Identity / Role to use MongoDB
             builder.Services.AddSingleton<IUserStore<TIdentity>>(x =>
             {

@@ -60,7 +60,7 @@ namespace MvcClient
                 ClientSecret = "secret",
 
                 ResponseType = "code id_token",
-                Scope = { "api1", "offline_access" },
+                Scope = { "api.sample", "offline_access" },
 
                 GetClaimsFromUserInfoEndpoint = true,
                 SaveTokens = true

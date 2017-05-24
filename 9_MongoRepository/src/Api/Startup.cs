@@ -40,8 +40,9 @@ namespace Api
             {
                 Authority = "http://localhost:5000",
                 RequireHttpsMetadata = false,
+                ////AllowedScopes = { "OpenId", "Profile", "Email"},
 
-                ApiName = "api1"
+                ApiName = "api.sample"
             });
 
             app.UseMvc();

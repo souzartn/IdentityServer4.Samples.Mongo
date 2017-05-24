@@ -80,7 +80,7 @@ namespace QuickstartIdentityServer
                 .AddClients()
                 .AddIdentityApiResources()
                 .AddPersistedGrants()
-                .AddTestUsers(Config.GetUsers())
+                //.AddTestUsers(Config.GetUsers())
                 .AddProfileService<ProfileService>();
         }
 
@@ -98,6 +98,7 @@ namespace QuickstartIdentityServer
             app.UseIdentity();
 
 
+            // Configure Google Auth
             app.UseGoogleAuthentication(new GoogleOptions
             {
                 AuthenticationScheme = "Google",
@@ -105,7 +106,8 @@ namespace QuickstartIdentityServer
                 SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
 
                 ClientId = "434483408261-55tc8n0cs4ff1fe21ea8df2o443v2iuc.apps.googleusercontent.com",
-                ClientSecret = "3gcoTrEDPPJ0ukn_aYYT6PWo"
+                ClientSecret = "3gcoTrEDPPJ0ukn_aYYT6PWo",
+                Scope = { "openid", "profile", "email" }
             });
 
 

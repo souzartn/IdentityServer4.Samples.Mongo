@@ -1,14 +1,10 @@
 ﻿@model LoginViewModel
-
 <div class="login-page">
     <div class="page-header">
         <h1>Login</h1>
     </div>
-
     @Html.Partial("_ValidationSummary")
-
     <div class="row">
-
         @if (Model.EnableLocalLogin)
         {
             <div class="col-sm-6">
@@ -17,10 +13,8 @@
                         <h3 class="panel-title">Local Login</h3>
                     </div>
                     <div class="panel-body">
-
                         <form asp-route="Login">
                             <input type="hidden" asp-for="ReturnUrl" />
-
                             <fieldset>
                                 <div class="form-group">
                                     <label asp-for="Username"></label>
@@ -39,6 +33,13 @@
                                         </label>
                                     </div>
                                 }
+                                <div class="alert alert-info">
+                                    <h4>For this option Users must exist in DB! Try the following:</h4>
+                                    <ul>
+                                        <li><b>User:</b> Bob / <b>Password:</b>  Password.1</li>
+                                        <li><b>User:</b> Alice / <b>Password:</b> Password.1</li>
+                                    </ul>
+                                </div>
                                 <div class="form-group">
                                     <button class="btn btn-primary">Login</button>
                                 </div>
@@ -48,7 +49,6 @@
                 </div>
             </div>
         }
-
         @if (Model.ExternalProviders.Any())
         {
             <div class="col-md-6 col-sm-6 external-providers">
@@ -70,11 +70,13 @@
                                 </li>
                             }
                         </ul>
+                        <div class="alert alert-info">
+                            <h4> This option will add new users (automatically) to DB if they do not exist.</h4>
+                        </div>
                     </div>
                 </div>
             </div>
         }
-
         @if (!Model.EnableLocalLogin && !Model.ExternalProviders.Any())
         {
             <div class="alert alert-warning">
