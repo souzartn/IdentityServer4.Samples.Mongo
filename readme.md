@@ -53,7 +53,7 @@ configure other custom pieces   such as IClientStore, IResourceStore and IPersis
 e.g. Please refer to a piece of "CustomResourceStore" below:
 
 >
->...
+>       ...
 >		private IEnumerable<ApiResource> GetAllApiResources()
 >
 >       {
@@ -61,8 +61,7 @@ e.g. Please refer to a piece of "CustomResourceStore" below:
 >            return _dbRepository.All<ApiResource>();
 >
 >       }
->
->...
+>      ...
 >
 
  
