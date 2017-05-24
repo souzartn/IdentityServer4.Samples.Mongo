@@ -34,16 +34,16 @@ These samples are based on [IdentityServer4.quickstart.samples](https://github.c
 [8_EntityFrameworkStorage sample](https://github.com/IdentityServer/IdentityServer4.Samples/tree/release/Quickstarts/8_EntityFrameworkStorage) implementation. Hence 
 we perform all "initial plumbing" on ConfigureServices() method at startup.cs.
 
-'
-            // ---  configure identity server with MONGO Repository for stores, keys, clients and scopes ---
-            services.AddIdentityServer()
-                .AddTemporarySigningCredential()
-                .AddMongoRepository()
-                .AddClients()
-                .AddIdentityApiResources()
-                .AddPersistedGrants()
-                .AddTestUsers(Config.GetUsers());
-'
+
+>            // ---  configure identity server with MONGO Repository for stores, keys, clients and scopes ---
+>            services.AddIdentityServer()
+>                .AddTemporarySigningCredential()
+>                .AddMongoRepository()
+>                .AddClients()
+>                .AddIdentityApiResources()
+>                .AddPersistedGrants()
+>                .AddTestUsers(Config.GetUsers());
+
 
 2. The IdentityServerBuilderExtensions extension provides methods to enable  DI related work executed by ConfigureServices() as listed above. 
 It's important to highlight that AddMongoRepository() method configure a Simple Repository (Design Pattern) to handle persistence to MongoDB. Other that, this class 
@@ -51,14 +51,14 @@ configure other custom pieces   such as IClientStore, IResourceStore and IPersis
 
 3. Based on that, we just need to make sure all required IdentityServer4 Interfaces, listed above, are implemented leveraging MongoRepository.
 e.g. Please refer to a piece of "CustomResourceStore" below:
-'
-...
-		private IEnumerable<ApiResource> GetAllApiResources()
-        {
-            return _dbRepository.All<ApiResource>();
-        }
-...
-'
+
+>...
+>		private IEnumerable<ApiResource> GetAllApiResources()
+>        {
+>            return _dbRepository.All<ApiResource>();
+>        }
+>...
+
  
 ### Next steps
 
