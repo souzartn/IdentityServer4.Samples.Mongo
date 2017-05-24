@@ -35,8 +35,8 @@ These samples are based on [IdentityServer4.quickstart.samples](https://github.c
 we perform all "initial plumbing" on ConfigureServices() method at startup.cs.
 
 
->            // ---  configure identity server with MONGO Repository for stores, keys, clients and scopes ---
->            services.AddIdentityServer()
+>         // ---  configure identity server with MONGO Repository for stores, keys, clients and scopes ---
+>         services.AddIdentityServer()
 >                .AddTemporarySigningCredential()
 >                .AddMongoRepository()
 >                .AddClients()
@@ -52,12 +52,18 @@ configure other custom pieces   such as IClientStore, IResourceStore and IPersis
 3. Based on that, we just need to make sure all required IdentityServer4 Interfaces, listed above, are implemented leveraging MongoRepository.
 e.g. Please refer to a piece of "CustomResourceStore" below:
 
+>
 >...
 >		private IEnumerable<ApiResource> GetAllApiResources()
->        {
+>
+>       {
+>
 >            return _dbRepository.All<ApiResource>();
->        }
+>
+>       }
+>
 >...
+>
 
  
 ### Next steps
