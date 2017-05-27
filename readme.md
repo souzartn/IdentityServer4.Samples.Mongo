@@ -1,76 +1,61 @@
-# IdentityServer4 with  MongoDB configuration 
+# IdentityServer4 Sample for  MongoDB  
 
-These samples are based on [IdentityServer4.quickstart.samples](https://github.com/IdentityServer/IdentityServer4.Samples) and aims to shows how to use MongoDB for the configuration data.
+IdentityServer4 samples that shows how to use MongoDB for the configuration data. These sample  are based on [IdentityServer4.quickstart.samples](https://github.com/IdentityServer/IdentityServer4.Samples). 
 
 ## Solution overview: 
 
-### This repo contains 02 samples as per below:
+This repo contains 02 samples based on MongoDB:
 
-* IdentityServer4-mongo: simple IdentityServer4 sample similar to [IdentityServer4.quickstart.samples](https://github.com/IdentityServer/IdentityServer4.Samples)
-* IdentityServer4-mongo-AspIdentity: Sample based on IdentityServer4  and  Asp Identity 
+1. __IdentityServer4-mongo__: Similar to [Quickstart #8: EntityFramework configuration] (https://github.com/IdentityServer/IdentityServer4.Samples/tree/release/Quickstarts/8_EntityFrameworkStorage) but using MongoDB for the configuration data. 
+<div style="width:80%; margin:0 auto;">
+<img src="./images/Solution-identityServer-mongo.jpg"  width="300px" height="200px" alt="">
+</div>
 
+2. __IdentityServer4-mongo-AspIdentity__: More elaborated sample  based on uses ASP.NET Identity for identity management that uses using MongoDB for the configuration data.  
+<div style="width:80%; margin:0 auto;">
+<img src="./images/Solution-aspnet-identity.jpg"  width="300px" height="200px" alt="">
+</div>
 
-### Important technical dependencies
+Each Sample Solution listed above is composed of:
+
+* _QuickstartIdentityServer_ -  project based on IdentityServer4 that manages authentication
+* _API_ - is a sample API project, used by  client/* projects to showcase QuickstartIdentityServer functionality
+* _clients/MvcClient_ - Asp .Net Core mvc  client project sample
+* _clients/Client_ - .NET Core console client project sample
+
+### Technical dependencies
 
 * Solution is based on Visual Studio 2017.
 * ASP .Net Core
 * Nugets:
-	* MongoDB.Driver
-	* Microsoft.AspNetCore.Identity.MongoDB (for IdentityServer4-mongo-AspIdentity sample)
+	* [MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/)
+	* [Microsoft.AspNetCore.Identity.MongoDB](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity.MongoDB/)  - for _IdentityServer4-mongo-AspIdentity_ sample.
 
-
-### Solution structure
-
-* QuickstartIdentityServer -  project based on IdentityServer4 that manages authentication
-* API - is a sample API project, used by  client/* projects to showcase QuickstartIdentityServer functionality
-* clients/MvcClient - ASP .NET Core client project sample
-* clients/Client - .NET Core console client project sample
 
 - - - -
 
-## Implementation Walkthrought
+## Running the solution
 
-1. IdentityServer4 configuration to use mongo as repository is based on DI and IdentityServerBuilderExtensions - Similar to  
-[8_EntityFrameworkStorage sample](https://github.com/IdentityServer/IdentityServer4.Samples/tree/release/Quickstarts/8_EntityFrameworkStorage) implementation. Hence 
-we perform all "initial plumbing" on ConfigureServices() method at startup.cs.
+Getting one of those sample project up and running on your machine should be fairly straightforward one you have any MongoDB running.
 
-
->         // ---  configure identity server with MONGO Repository for stores, keys, clients and scopes ---
->         services.AddIdentityServer()
->                .AddTemporarySigningCredential()
->                .AddMongoRepository()
->                .AddClients()
->                .AddIdentityApiResources()
->                .AddPersistedGrants()
->                .AddTestUsers(Config.GetUsers());
+* If you __do not have MongoDB__ in your environment or wish to run it locally  - take a look at [Setup mongo](./mongodb.md)
 
 
-2. The IdentityServerBuilderExtensions extension provides methods to enable  DI related work executed by ConfigureServices() as listed above. 
-It's important to highlight that AddMongoRepository() method configure a Simple Repository (Design Pattern) to handle persistence to MongoDB. Other that, this class 
-configure other custom pieces   such as IClientStore, IResourceStore and IPersistedGrantStore enabling IdentityServer4 interact with MongoDB seamlessly.
+1. With mongo depency resolved, open the selected project in Visual Studio.
+2. Make sure you have multiple projects selected to startup - "QuickstartIdentityServer", "Api" and any desired client (e.g. Clients\MvcClient) before executing solution from Visual Studio - see screenshots below:
+<div style="width:80%; margin:0 auto;">
+<img src="./images/SetStartupProjects_menu.jpg"  width="300px">
+<img src="./images/SetStartupProjects.jpg" width="300px">
+</div>
 
-3. Based on that, we just need to make sure all required IdentityServer4 Interfaces, listed above, are implemented leveraging MongoRepository.
-e.g. Please refer to a piece of "CustomResourceStore" below:
+__First execution__: You should get an execption - The first execution will automatically create a new Mongo  Repository (database), but due to MongoDB.Driver limitations it is necessary to restart the solution in order to proper configure MongoDB to ignore Extra Elements such as  "_id" that does not exist in IdentityServer4.Models classes.
 
->
->       ...
->		private IEnumerable<ApiResource> GetAllApiResources()
->
->       {
->
->            return _dbRepository.All<ApiResource>();
->
->       }
->      ...
->
 
  
 ### Next steps
 
 *  [Setup mongo](./mongodb.md)
 
-*  [Running solution](./running.md)
-
-*  [FAQ](./faq.md)
+*  [Mongo Implementation overview](./MongoImplementation.md)
 
 
