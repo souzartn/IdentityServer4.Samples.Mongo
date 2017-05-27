@@ -36,9 +36,9 @@ Each Sample Solution listed above is composed of:
 
 ## Running the solution
 
-Getting one of those sample project up and running on your machine should be fairly straightforward one you have any MongoDB running.
+Getting one of those sample project up and running on your machine should be fairly straightforward once you have any MongoDB running.
 
-* If you __do not have MongoDB__ in your environment or wish to run it locally  - take a look at [Setup mongo](./mongodb.md)
+* If you __do not have MongoDB__ in your environment or wish to run it locally please take a look at [Setup mongo](./mongodb.md)
 
 
 1. With mongo depency resolved, open the selected project in Visual Studio.
@@ -48,14 +48,18 @@ Getting one of those sample project up and running on your machine should be fai
 <img src="./images/SetStartupProjects.jpg" width="300px">
 </div>
 
-__First execution__: You should get an execption - The first execution will automatically create a new Mongo  Repository (database), but due to MongoDB.Driver limitations it is necessary to restart the solution in order to proper configure MongoDB to ignore Extra Elements such as  "_id" that does not exist in IdentityServer4.Models classes.
+### __First execution__
+
+In your very first execution you should get an exception stating that "Mongo Repository was created/populated! Please restart your website..."
+
+This is because the first execution will automatically create a new Mongo  Repository (database), but due to MongoDB.Driver limitations it is necessary to restart the solution in order to proper configure MongoDB to ignore Extra Elements such as  "_id" that does not exist in IdentityServer4.Models classes.
 
 
  
-### Next steps
+### Aditional information
 
-*  [Setup mongo](./mongodb.md)
+*  [Setup mongo locally](./mongodb.md)
 
-*  [Mongo Implementation overview](./MongoImplementation.md)
+*  [IdentityServer4 Mongo implementation overview](./MongoImplementation.md)
 
 

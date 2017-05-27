@@ -26,4 +26,6 @@ From your command prompt, execute the following commands:
 With your local database in place, you may wish use [Robomongo](http://robomongo.org/)
 to browse/ edit its content. 
  
+ ### Alternative option -  Docker
  
+If you prefer use Docker, please take a look at [Dockerize MongoDB](https://docs.docker.com/engine/examples/mongodb/)
