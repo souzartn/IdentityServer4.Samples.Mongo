@@ -41,7 +41,7 @@ namespace QuickstartIdentityServer.Quickstart.Store
         {
             return Task.Run(() =>
             {
-                var list = _dbRepository.Where<ApiResource>(a => scopeNames.Contains(a.Name));
+                var list = _dbRepository.Where<ApiResource>(a => a.Scopes.Any(s => scopeNames.Contains(s.Name)));
 
                 var t = list.ToList();
                 return list.AsEnumerable();
