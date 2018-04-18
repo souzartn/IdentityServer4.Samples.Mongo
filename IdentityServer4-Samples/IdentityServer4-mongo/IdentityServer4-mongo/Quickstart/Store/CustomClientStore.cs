@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using IdentityServer4.Models;
-using MongoDB.Driver;
 using QuickstartIdentityServer.Quickstart.Interface;
 
 namespace QuickstartIdentityServer.Quickstart.Store
@@ -19,11 +15,9 @@ namespace QuickstartIdentityServer.Quickstart.Store
 
         public Task<Client> FindClientByIdAsync(string clientId)
         {
-            return Task.Run(() =>
-            {
-                var client = _dbRepository.Single<Client>(c => c.ClientId == clientId);
-                return client;
-            });
+            var client = _dbRepository.Single<Client>(c => c.ClientId == clientId);
+
+            return Task.FromResult(client);
         }
     }
 }
