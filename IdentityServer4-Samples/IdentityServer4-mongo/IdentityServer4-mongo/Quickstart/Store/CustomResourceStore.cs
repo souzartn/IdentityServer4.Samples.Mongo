@@ -17,7 +17,6 @@ namespace QuickstartIdentityServer.Quickstart.Store
             _dbRepository = repository;
         }
 
-
         private IEnumerable<ApiResource> GetAllApiResources()
         {
             return _dbRepository.All<ApiResource>();
@@ -31,41 +30,28 @@ namespace QuickstartIdentityServer.Quickstart.Store
         public Task<ApiResource> FindApiResourceAsync(string name)
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
-            return Task.Run(() =>
-            {
-                return _dbRepository.Single<ApiResource>(a => a.Name == name);
-            });
+
+            return Task.FromResult(_dbRepository.Single<ApiResource>(a => a.Name == name));
         }
 
         public Task<IEnumerable<ApiResource>> FindApiResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            return Task.Run(() =>
-            {
-                var list = _dbRepository.Where<ApiResource>(a => a.Scopes.Any(s => scopeNames.Contains(s.Name)));
+            var list = _dbRepository.Where<ApiResource>(a => a.Scopes.Any(s => scopeNames.Contains(s.Name)));
 
-                var t = list.ToList();
-                return list.AsEnumerable();
-            });
-
-
+            return Task.FromResult(list.AsEnumerable());
         }
 
         public Task<IEnumerable<IdentityResource>> FindIdentityResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            return Task.Run(() =>
-            {
-                var list = _dbRepository.Where<IdentityResource>(e => scopeNames.Contains(e.Name));
-                return list.AsEnumerable();
-            });
+            var list = _dbRepository.Where<IdentityResource>(e => scopeNames.Contains(e.Name));
+
+            return Task.FromResult(list.AsEnumerable());
         }
 
         public Task<Resources> GetAllResources()
         {
-            return Task.Run(() =>
-            {
-                var result = new Resources(GetAllIdentityResources(), GetAllApiResources());
-                return result;
-            });
+            var result = new Resources(GetAllIdentityResources(), GetAllApiResources());
+            return Task.FromResult(result);
         }
 
         private Func<IdentityResource, bool> BuildPredicate(Func<IdentityResource, bool> predicate)
