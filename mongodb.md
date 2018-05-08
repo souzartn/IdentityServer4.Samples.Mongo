@@ -19,11 +19,11 @@ From your command prompt, execute the following commands:
 >cd mongodb
 >mkdir identity4db
 >cd identity4db
->@echo "C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe" --dbpath "C:\mongodb\identity4db" > identity4db.bat
+>@echo "C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --dbpath "C:\mongodb\identity4db" > identity4db.bat
 >identity4db.bat
 ```
 
-With your local database in place, you may wish use [Robomongo](http://robomongo.org/)
+With your local database in place, you can use Mongo Compass Community or something a bit more user user friendly like [Robo3T](http://robomongo.org/)
 to browse/ edit its content. 
  
  ### Alternative option -  Docker
