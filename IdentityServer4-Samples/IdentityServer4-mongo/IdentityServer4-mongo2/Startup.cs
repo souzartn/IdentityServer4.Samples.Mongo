@@ -1,29 +1,27 @@
 ﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
+using System.Reflection;
 using IdentityServer4;
+using IdentityServer4.Quickstart.Interface;
 using IdentityServer4.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using MongoDB.Bson.Serialization;
-using QuickstartIdentityServer.Quickstart.Extension;
-using QuickstartIdentityServer.Quickstart.Interface;
+using Microsoft.IdentityModel.Tokens;
 using System;
+using IdentityServer4.Quickstart.Extension;
+using MongoDB.Bson.Serialization;
 
 namespace QuickstartIdentityServer
 {
     public class Startup
     {
-
         public IConfigurationRoot Configuration { get; }
 
 
-
-
-        public Startup(IHostingEnvironment env)
+        public Startup(IHostingEnvironment env, IConfiguration config)
         {
             var environmentVar = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             if (environmentVar == null)
@@ -36,20 +34,38 @@ namespace QuickstartIdentityServer
                 .AddJsonFile($"appsettings.{environmentVar}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
-        }
 
+        }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
 
-            // ---  configure identity server with in-memory stores, keys, clients and scopes ---
+            //const string connectionString = @"Data Source=(LocalDb)\MSSQLLocalDB;database=IdentityServer4.Quickstart.EntityFramework-2.0.0;trusted_connection=yes;";
+            //var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+
+            //// configure identity server with in-memory stores, keys, clients and scopes
             //services.AddIdentityServer()
-            //    .AddTemporarySigningCredential()
-            //    .AddInMemoryIdentityResources(Config.GetIdentityResources())
-            //    .AddInMemoryApiResources(Config.GetApiResources())
-            //    .AddInMemoryClients(Config.GetClients())
-            //    .AddTestUsers(Config.GetUsers());
+            //    .AddDeveloperSigningCredential()
+            //    .AddTestUsers(Config.GetUsers())
+            //    // this adds the config data from DB (clients, resources)
+            //    .AddConfigurationStore(options =>
+            //    {
+            //        options.ConfigureDbContext = builder =>
+            //            builder.UseSqlServer(connectionString,
+            //                sql => sql.MigrationsAssembly(migrationsAssembly));
+            //    })
+            //    // this adds the operational data from DB (codes, tokens, consents)
+            //    .AddOperationalStore(options =>
+            //    {
+            //        options.ConfigureDbContext = builder =>
+            //            builder.UseSqlServer(connectionString,
+            //                sql => sql.MigrationsAssembly(migrationsAssembly));
+
+            //        // this enables automatic token cleanup. this is optional.
+            //        options.EnableTokenCleanup = true;
+            //        options.TokenCleanupInterval = 30;
+            //    });
 
 
             // Dependency Injection - Register the IConfigurationRoot instance mapping to our "ConfigurationOptions" class 
@@ -57,41 +73,50 @@ namespace QuickstartIdentityServer
 
             // ---  configure identity server with MONGO Repository for stores, keys, clients and scopes ---
             services.AddIdentityServer()
-                .AddTemporarySigningCredential()
+                .AddDeveloperSigningCredential()
                 .AddMongoRepository()
                 .AddClients()
                 .AddIdentityApiResources()
                 .AddPersistedGrants()
                 .AddTestUsers(Config.GetUsers());
+
+
+
+            services.AddAuthentication()
+                .AddGoogle("Google", options =>
+                {
+                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+
+                    options.ClientId = "434483408261-55tc8n0cs4ff1fe21ea8df2o443v2iuc.apps.googleusercontent.com";
+                    options.ClientSecret = "3gcoTrEDPPJ0ukn_aYYT6PWo";
+                })
+                .AddOpenIdConnect("oidc", "OpenID Connect", options =>
+                {
+                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                    options.SignOutScheme = IdentityServerConstants.SignoutScheme;
+
+                    options.Authority = "https://demo.identityserver.io/";
+                    options.ClientId = "implicit";
+
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        NameClaimType = "name",
+                        RoleClaimType = "role"
+                    };
+                });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-
-            loggerFactory.AddConsole(LogLevel.Debug);
-            app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
 
             app.UseIdentityServer();
 
-            app.UseGoogleAuthentication(new GoogleOptions
-            {
-                AuthenticationScheme = "Google",
-                DisplayName = "Google",
-                SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
-
-                ClientId = "434483408261-55tc8n0cs4ff1fe21ea8df2o443v2iuc.apps.googleusercontent.com",
-                ClientSecret = "3gcoTrEDPPJ0ukn_aYYT6PWo"
-            });
-
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
-
-            // --- Configure Classes to ignore Extra Elements (e.g. _Id) when deserializing ---
-            ConfigureMongoDriver2IgnoreExtraElements();
-
-            // --- The following will do the initial DB population (If needed / first time) ---
-            InitializeDatabase(app);
-
         }
 
 
@@ -169,6 +194,5 @@ namespace QuickstartIdentityServer
 
 
         }
-
     }
 }
