@@ -98,7 +98,7 @@ namespace QuickstartIdentityServer.Quickstart.Extension
         /// <returns></returns>
         public static IIdentityServerBuilder AddPersistedGrants(this IIdentityServerBuilder builder)
         {
-            builder.Services.TryAddSingleton<IPersistedGrantStore, CustomPersistedGrantStore>();
+            builder.Services.AddSingleton<IPersistedGrantStore, CustomPersistedGrantStore>();
             return builder;
         }
 
