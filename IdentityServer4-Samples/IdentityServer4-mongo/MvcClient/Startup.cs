@@ -1,39 +1,49 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using System.IdentityModel.Tokens.Jwt;
+
 
 namespace MvcClient
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-
-            Configuration = builder.Build();
-        }
-
-        public IConfigurationRoot Configuration { get; }
-
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-        }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-        {
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = "Cookies";
+                options.DefaultChallengeScheme = "oidc";
+            })
+                .AddCookie("Cookies")
+                .AddOpenIdConnect("oidc", options =>
+                {
+                    options.SignInScheme = "Cookies";
 
+                    options.Authority = "http://localhost:5000";
+                    options.RequireHttpsMetadata = false;
+
+                    options.ClientId = "mvc";
+                    options.ClientSecret = "secret";
+                    options.ResponseType = "code id_token";
+
+                    options.SaveTokens = true;
+                    options.GetClaimsFromUserInfoEndpoint = true;
+
+                    options.Scope.Add("api1");
+                    options.Scope.Add("offline_access");
+                });
+        }
+
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -43,31 +53,13 @@ namespace MvcClient
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AuthenticationScheme = "Cookies"
-            });
+            app.UseAuthentication();
 
-            app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
-            {
-                AuthenticationScheme = "oidc",
-                SignInScheme = "Cookies",
-
-                Authority = "http://localhost:5000",
-                RequireHttpsMetadata = false,
-
-                ClientId = "mvc",
-                ClientSecret = "secret",
-
-                ResponseType = "code id_token",
-                Scope = { "api1", "offline_access" },
-
-                GetClaimsFromUserInfoEndpoint = true,
-                SaveTokens = true
-            });
-            
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }
+
+
+      
     }
 }

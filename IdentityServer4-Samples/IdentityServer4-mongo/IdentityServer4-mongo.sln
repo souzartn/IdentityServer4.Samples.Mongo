@@ -17,8 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResourceOwnerClient", "Reso
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{C3BF39F9-8478-41B2-9D1B-F571D7B39A70}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickstartIdentityServer2", "IdentityServer4-mongo2\QuickstartIdentityServer2.csproj", "{8262CE4B-C1D0-49D7-9ED7-401A2C7ABCED}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickstartIdentityServer", "IdentityServer4-mongo\QuickstartIdentityServer.csproj", "{9E44ADE9-A196-4B40-9EFC-19B9E73C8C2A}"
 EndProject
 Global
@@ -43,10 +41,6 @@ Global
 		{C3BF39F9-8478-41B2-9D1B-F571D7B39A70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3BF39F9-8478-41B2-9D1B-F571D7B39A70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3BF39F9-8478-41B2-9D1B-F571D7B39A70}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8262CE4B-C1D0-49D7-9ED7-401A2C7ABCED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8262CE4B-C1D0-49D7-9ED7-401A2C7ABCED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8262CE4B-C1D0-49D7-9ED7-401A2C7ABCED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8262CE4B-C1D0-49D7-9ED7-401A2C7ABCED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9E44ADE9-A196-4B40-9EFC-19B9E73C8C2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9E44ADE9-A196-4B40-9EFC-19B9E73C8C2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E44ADE9-A196-4B40-9EFC-19B9E73C8C2A}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using MongoDB.Bson.Serialization;
 using QuickstartIdentityServer.Quickstart.Extension;
 using QuickstartIdentityServer.Quickstart.Interface;
@@ -55,9 +56,34 @@ namespace QuickstartIdentityServer
             // Dependency Injection - Register the IConfigurationRoot instance mapping to our "ConfigurationOptions" class 
             services.Configure<ConfigurationOptions>(Configuration);
 
+
+            services.AddAuthentication()
+              .AddGoogle("Google", options =>
+              {
+                  options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+
+                  options.ClientId = "434483408261-55tc8n0cs4ff1fe21ea8df2o443v2iuc.apps.googleusercontent.com";
+                  options.ClientSecret = "3gcoTrEDPPJ0ukn_aYYT6PWo";
+              })
+              .AddOpenIdConnect("oidc", "OpenID Connect", options =>
+              {
+                  options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                  options.SignOutScheme = IdentityServerConstants.SignoutScheme;
+
+                  options.Authority = "https://demo.identityserver.io/";
+                  options.ClientId = "implicit";
+
+                  options.TokenValidationParameters = new TokenValidationParameters
+                  {
+                      NameClaimType = "name",
+                      RoleClaimType = "role"
+                  };
+              });
+
+
             // ---  configure identity server with MONGO Repository for stores, keys, clients and scopes ---
             services.AddIdentityServer()
-                .AddTemporarySigningCredential()
+                .AddDeveloperSigningCredential()
                 .AddMongoRepository()
                 .AddClients()
                 .AddIdentityApiResources()
@@ -65,26 +91,35 @@ namespace QuickstartIdentityServer
                 .AddTestUsers(Config.GetUsers());
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
 
-            loggerFactory.AddConsole(LogLevel.Debug);
-            app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
+
+         
+
+            //app.UseGoogleAuthentication(new GoogleOptions
+            //{
+            //    AuthenticationScheme = "Google",
+            //    DisplayName = "Google",
+            //    SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
+
+            //    ClientId = "434483408261-55tc8n0cs4ff1fe21ea8df2o443v2iuc.apps.googleusercontent.com",
+            //    ClientSecret = "3gcoTrEDPPJ0ukn_aYYT6PWo"
+            //});
 
             app.UseIdentityServer();
-
-            app.UseGoogleAuthentication(new GoogleOptions
-            {
-                AuthenticationScheme = "Google",
-                DisplayName = "Google",
-                SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
-
-                ClientId = "434483408261-55tc8n0cs4ff1fe21ea8df2o443v2iuc.apps.googleusercontent.com",
-                ClientSecret = "3gcoTrEDPPJ0ukn_aYYT6PWo"
-            });
-
+            app.UseAuthentication();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
+
 
             // --- Configure Classes to ignore Extra Elements (e.g. _Id) when deserializing ---
             ConfigureMongoDriver2IgnoreExtraElements();
@@ -95,6 +130,7 @@ namespace QuickstartIdentityServer
         }
 
 
+        #region Database
         private static void InitializeDatabase(IApplicationBuilder app)
         {
             bool createdNewRepository = false;
@@ -169,6 +205,8 @@ namespace QuickstartIdentityServer
 
 
         }
+
+        #endregion
 
     }
 }

@@ -2,9 +2,8 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 using System;
-using System.IO;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Builder;
 
 namespace Api
 {
@@ -14,15 +13,11 @@ namespace Api
         {
             Console.Title = "API";
 
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseUrls("http://localhost:5001")
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .Build();
-
-            host.Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
+
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>();
     }
 }

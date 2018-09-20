@@ -49,8 +49,7 @@ namespace MvcClient.Controllers
 
         public async Task<IActionResult> CallApiUsingUserAccessToken()
         {
-            var accessToken = await HttpContext.Authentication.GetTokenAsync("access_token");
-
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
             var client = new HttpClient();
             client.SetBearerToken(accessToken);
             var content = await client.GetStringAsync("http://localhost:5001/identity");
