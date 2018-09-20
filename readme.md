@@ -23,10 +23,10 @@ Each Sample Solution listed above is composed of:
 * _clients/MvcClient_ - Asp .Net Core mvc  client project sample
 * _clients/Client_ - .NET Core console client project sample
 
-### Technical dependencies
+### Technical dependencies 
 
 * Solution is based on Visual Studio 2017.
-* ASP .Net Core
+* ASP .Net Core 
 * Nugets:
 	* [MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/)
 	* [Microsoft.AspNetCore.Identity.MongoDB](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity.MongoDB/)  - for _IdentityServer4-mongo-AspIdentity_ sample.
