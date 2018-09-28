@@ -53,6 +53,16 @@ namespace QuickstartIdentityServer
             // Dependency Injection - Register the IConfigurationRoot instance mapping to our "ConfigurationOptions" class 
             services.Configure<ConfigurationOptions>(Configuration);
 
+            // ---  configure identity server with MONGO Repository for stores, keys, clients and scopes ---
+            services.AddIdentityServer()
+                .AddDeveloperSigningCredential()
+                .AddMongoRepository()
+                .AddClients()
+                .AddIdentityApiResources()
+                .AddPersistedGrants()
+                .AddTestUsers(Config.GetUsers());
+
+
             services.AddAuthentication()
               .AddGoogle("Google", options =>
               {
@@ -76,14 +86,7 @@ namespace QuickstartIdentityServer
                   };
               });
 
-            // ---  configure identity server with MONGO Repository for stores, keys, clients and scopes ---
-            services.AddIdentityServer()
-                .AddDeveloperSigningCredential()
-                .AddMongoRepository()
-                .AddClients()
-                .AddIdentityApiResources()
-                .AddPersistedGrants()
-                .AddTestUsers(Config.GetUsers());
+         
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
