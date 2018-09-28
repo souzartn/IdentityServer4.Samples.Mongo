@@ -45,6 +45,8 @@ namespace Client
                 var content = await response.Content.ReadAsStringAsync();
                 Console.WriteLine(JArray.Parse(content));
             }
+            Console.WriteLine("Press any key...");
+            Console.ReadKey();
         }
     }
 }

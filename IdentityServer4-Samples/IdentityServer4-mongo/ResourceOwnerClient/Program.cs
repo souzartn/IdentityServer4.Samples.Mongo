@@ -45,6 +45,8 @@ namespace ResourceOwnerClient
                 var content = response.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(JArray.Parse(content));
             }
+            Console.WriteLine("Press any key...");
+            Console.ReadKey();
         }
     }
 }

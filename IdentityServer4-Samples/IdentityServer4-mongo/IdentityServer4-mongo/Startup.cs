@@ -21,9 +21,6 @@ namespace QuickstartIdentityServer
 
         public IConfigurationRoot Configuration { get; }
 
-
-
-
         public Startup(IHostingEnvironment env)
         {
             var environmentVar = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
@@ -46,7 +43,7 @@ namespace QuickstartIdentityServer
 
             // ---  configure identity server with in-memory stores, keys, clients and scopes ---
             //services.AddIdentityServer()
-            //    .AddTemporarySigningCredential()
+            //    .AddDeveloperSigningCredential()
             //    .AddInMemoryIdentityResources(Config.GetIdentityResources())
             //    .AddInMemoryApiResources(Config.GetApiResources())
             //    .AddInMemoryClients(Config.GetClients())
@@ -55,7 +52,6 @@ namespace QuickstartIdentityServer
 
             // Dependency Injection - Register the IConfigurationRoot instance mapping to our "ConfigurationOptions" class 
             services.Configure<ConfigurationOptions>(Configuration);
-
 
             services.AddAuthentication()
               .AddGoogle("Google", options =>
@@ -80,7 +76,6 @@ namespace QuickstartIdentityServer
                   };
               });
 
-
             // ---  configure identity server with MONGO Repository for stores, keys, clients and scopes ---
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential()
@@ -102,18 +97,6 @@ namespace QuickstartIdentityServer
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
-         
-
-            //app.UseGoogleAuthentication(new GoogleOptions
-            //{
-            //    AuthenticationScheme = "Google",
-            //    DisplayName = "Google",
-            //    SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
-
-            //    ClientId = "434483408261-55tc8n0cs4ff1fe21ea8df2o443v2iuc.apps.googleusercontent.com",
-            //    ClientSecret = "3gcoTrEDPPJ0ukn_aYYT6PWo"
-            //});
 
             app.UseIdentityServer();
             app.UseAuthentication();
