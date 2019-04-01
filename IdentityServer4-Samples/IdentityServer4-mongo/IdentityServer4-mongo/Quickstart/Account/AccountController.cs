@@ -37,14 +37,14 @@ namespace IdentityServer4.Quickstart.UI
         public AccountController(
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
-            IHttpContextAccessor httpContextAccessor,
+            IAuthenticationSchemeProvider schemeProvider, 
             IEventService events,
             TestUserStore users = null)
         {
             // if the TestUserStore is not in DI, then we'll just use the global users collection
             _users = users ?? new TestUserStore(TestUsers.Users);
             _interaction = interaction;
-            _account = new AccountService(interaction, httpContextAccessor, clientStore);
+            _account = new AccountService(interaction, clientStore, schemeProvider);
             _events = events;
         }
 
