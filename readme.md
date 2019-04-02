@@ -26,7 +26,7 @@ Each Sample Solution listed above is composed of:
 ### Technical dependencies 
 
 * Solution is based on Visual Studio 2017.
-* ASP .Net Core 
+* IdentityServer4-mongo ASP .Net Core 2.1 / IdentityServer4-mongo-AspIdentity .Net Core 1.1
 * Nugets:
 	* [MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/)
 	* [Microsoft.AspNetCore.Identity.MongoDB](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity.MongoDB/)  - for _IdentityServer4-mongo-AspIdentity_ sample.

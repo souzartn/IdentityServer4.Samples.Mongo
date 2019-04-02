@@ -19,7 +19,7 @@ From your command prompt, execute the following commands:
 >cd mongodb
 >mkdir identity4db
 >cd identity4db
->@echo "C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --dbpath "C:\mongodb\identity4db" > identity4db.bat
+>@echo "C:\Program Files\MongoDB\Server\4.0\bin\mongod.exe" --dbpath "C:\mongodb\identity4db" > identity4db.bat
 >identity4db.bat
 ```
 
