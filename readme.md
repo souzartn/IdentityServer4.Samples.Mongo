@@ -4,17 +4,12 @@ IdentityServer4 samples that shows how to use MongoDB for the configuration data
 
 ## Solution overview: 
 
-This repo contains 02 samples based on MongoDB:
-
-1. __IdentityServer4-mongo__: Similar to [Quickstart #8: EntityFramework configuration] (https://github.com/IdentityServer/IdentityServer4.Samples/tree/release/Quickstarts/8_EntityFrameworkStorage) but using MongoDB for the configuration data. 
+__7_EntityFrameworkStorage-mongo__: Based on [Quickstart #7: Using EntityFramework Core for configuration and operational data] (https://github.com/IdentityServer/IdentityServer4/tree/master/samples/Quickstarts/7_EntityFrameworkStorage) but using MongoDB for the configuration data. 
 <div style="width:80%; margin:0 auto;">
 <img src="./images/Solution-identityServer-mongo.jpg"  width="300px" height="200px" alt="">
 </div>
 
-2. __IdentityServer4-mongo-AspIdentity__: More elaborated sample  based on uses ASP.NET Identity for identity management that uses using MongoDB for the configuration data.  
-<div style="width:80%; margin:0 auto;">
-<img src="./images/Solution-aspnet-identity.jpg"  width="300px" height="200px" alt="">
-</div>
+Note: In order to better support this repo moving forward, we will only have one maintain sample based on MongoDB.
 
 Each Sample Solution listed above is composed of:
 
@@ -25,8 +20,8 @@ Each Sample Solution listed above is composed of:
 
 ### Technical dependencies 
 
-* Solution is based on Visual Studio 2017.
-* IdentityServer4-mongo ASP .Net Core 2.1 / IdentityServer4-mongo-AspIdentity .Net Core 1.1
+* Solution is based on Visual Studio 2019.
+* ASP .Net Core 2.2 
 * Nugets:
 	* [MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/)
 	* [Microsoft.AspNetCore.Identity.MongoDB](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity.MongoDB/)  - for _IdentityServer4-mongo-AspIdentity_ sample.
