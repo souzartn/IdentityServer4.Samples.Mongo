@@ -51,7 +51,7 @@ This is because the first execution will automatically create a new Mongo  Repos
 ### __Authentication__
 Once the MongoDB is created, you should see two browser tabs, one related to the MvcClient and the other related to QuickstartIdentityServer. 
 In the Click on "Secure" menu
-In the the MvcClient, click on "secure", you will be redirected to  QuickstartIdentityServer authentication page  - it is almost identical to all original  [IdentityServer4.Samples] (https://github.com/IdentityServer/IdentityServer4.Samples/), but for your convinience we took the opportunity to display a some sample user/password that were automatically added to the MongoDB.
+In the the MvcClient, click on "secure", you will be redirected to  QuickstartIdentityServer authentication page  - it is almost identical to all original  [IdentityServer4.Samples](https://github.com/IdentityServer/IdentityServer4.Samples/), but for your convinience we took the opportunity to display a some sample user/password that were automatically added to the MongoDB.
 
 <div style="width:80%; margin:0 auto;">
 <img src="./images/api_quickstart.jpg"  width="300px">
