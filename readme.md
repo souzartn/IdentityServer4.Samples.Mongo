@@ -13,7 +13,7 @@ Note: In order to better support this repo moving forward, we will only have one
 
 Each Sample Solution listed above is composed of:
 
-* _QuickstartIdentityServer_ -  project based on IdentityServer4 that manages authentication
+* _IdentityServer_ -  project based on IdentityServer4 that manages authentication
 * _API_ - is a sample API project, used by  client/* projects to showcase QuickstartIdentityServer functionality
 * _clients/MvcClient_ - Asp .Net Core mvc  client project sample
 * _clients/Client_ - .NET Core console client project sample
@@ -37,7 +37,7 @@ Getting one of those sample project up and running on your machine should be fai
 
 
 1. With mongo depency resolved, open the selected project in Visual Studio.
-2. Make sure you have multiple projects selected to startup - "QuickstartIdentityServer", "Api" and any desired client (e.g. Clients\MvcClient) before executing solution from Visual Studio - see screenshots below:
+2. Make sure you have multiple projects selected to startup - "IdentityServer", "Api" and any desired client (e.g. Clients\MvcClient) before executing solution from Visual Studio - see screenshots below:
 <div style="width:80%; margin:0 auto;">
 <img src="./images/SetStartupProjects_menu.jpg"  width="300px">
 <img src="./images/SetStartupProjects.jpg" width="300px">
