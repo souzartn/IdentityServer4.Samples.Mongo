@@ -22,9 +22,8 @@ Each Sample Solution listed above is composed of:
 
 * Solution is based on Visual Studio 2019.
 * ASP .Net Core 2.2 
-* Nugets:
+* Most relevant Nugets:
 	* [MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/)
-	* [Microsoft.AspNetCore.Identity.MongoDB](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity.MongoDB/)  - for _IdentityServer4-mongo-AspIdentity_ sample.
 
 
 - - - -
