@@ -1,11 +1,11 @@
 # IdentityServer4 Sample for  MongoDB  
 
-__7_EntityFrameworkStorage-mongo__: Based on [Quickstart #7: Using EntityFramework Core for configuration and operational data] (https://github.com/IdentityServer/IdentityServer4/tree/master/samples/Quickstarts/7_EntityFrameworkStorage) but using MongoDB for the configuration data. 
+__7_EntityFrameworkStorage-mongo__: Based on [Quickstart #7: Using EntityFramework Core for configuration and operational data](https://github.com/IdentityServer/IdentityServer4/tree/master/samples/Quickstarts/7_EntityFrameworkStorage) but using MongoDB for the configuration data. 
 <div style="width:80%; margin:0 auto;">
 <img src="./images/Solution-identityServer-mongo.jpg"  width="300px" height="200px" alt="">
 </div>
 
-Note: In order to better support this repo moving forward, we will only have one maintain sample based on MongoDB.
+Note: In order to better support this repo moving forward, we will only maintain one quicksample based on MongoDB.
 
 Each Sample Solution listed above is composed of:
 
