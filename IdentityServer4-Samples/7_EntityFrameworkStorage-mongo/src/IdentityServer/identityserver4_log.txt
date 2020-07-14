@@ -839,3 +839,144 @@ System.ArgumentException: An item with the same key has already been added. Key:
 2019-10-14 18:23:43.035 -04:00 [INF] Successful signout callback.
 2019-10-14 18:23:43.035 -04:00 [DBG] No client front-channel iframe urls
 2019-10-14 18:23:43.035 -04:00 [DBG] No client back-channel iframe urls
+2020-07-14 14:11:06.469 +01:00 [INF] Starting IdentityServer4 version 4.0.2+58e6bc8a94236b81d1d3c606c8295203c7c1c9e2
+2020-07-14 14:11:08.273 +01:00 [INF] Using the default authentication scheme idsrv for IdentityServer
+2020-07-14 14:11:08.274 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for authentication
+2020-07-14 14:11:08.275 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-in
+2020-07-14 14:11:08.276 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-out
+2020-07-14 14:11:08.277 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for challenge
+2020-07-14 14:11:08.277 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for forbid
+2020-07-14 14:14:15.758 +01:00 [INF] Starting IdentityServer4 version 4.0.2+58e6bc8a94236b81d1d3c606c8295203c7c1c9e2
+2020-07-14 14:14:18.632 +01:00 [INF] Using the default authentication scheme idsrv for IdentityServer
+2020-07-14 14:14:18.784 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for authentication
+2020-07-14 14:14:18.790 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-in
+2020-07-14 14:14:18.791 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-out
+2020-07-14 14:14:18.792 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for challenge
+2020-07-14 14:14:18.793 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for forbid
+2020-07-14 14:18:48.005 +01:00 [INF] Starting IdentityServer4 version 4.0.2+58e6bc8a94236b81d1d3c606c8295203c7c1c9e2
+2020-07-14 14:18:49.657 +01:00 [INF] Using the default authentication scheme idsrv for IdentityServer
+2020-07-14 14:18:49.658 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for authentication
+2020-07-14 14:18:49.658 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-in
+2020-07-14 14:18:49.658 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-out
+2020-07-14 14:18:49.659 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for challenge
+2020-07-14 14:18:49.660 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for forbid
+2020-07-14 14:20:22.344 +01:00 [INF] Starting IdentityServer4 version 4.0.2+58e6bc8a94236b81d1d3c606c8295203c7c1c9e2
+2020-07-14 14:20:24.027 +01:00 [INF] Using the default authentication scheme idsrv for IdentityServer
+2020-07-14 14:20:24.027 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for authentication
+2020-07-14 14:20:24.028 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-in
+2020-07-14 14:20:24.028 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-out
+2020-07-14 14:20:24.029 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for challenge
+2020-07-14 14:20:24.029 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for forbid
+2020-07-14 14:21:02.073 +01:00 [INF] Starting IdentityServer4 version 4.0.2+58e6bc8a94236b81d1d3c606c8295203c7c1c9e2
+2020-07-14 14:21:03.675 +01:00 [INF] Using the default authentication scheme idsrv for IdentityServer
+2020-07-14 14:21:03.676 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for authentication
+2020-07-14 14:21:03.676 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-in
+2020-07-14 14:21:03.677 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-out
+2020-07-14 14:21:03.678 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for challenge
+2020-07-14 14:21:03.678 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for forbid
+2020-07-14 14:21:24.726 +01:00 [DBG] Login Url: /Account/Login
+2020-07-14 14:21:24.735 +01:00 [DBG] Login Return Url Parameter: ReturnUrl
+2020-07-14 14:21:24.735 +01:00 [DBG] Logout Url: /Account/Logout
+2020-07-14 14:21:24.735 +01:00 [DBG] ConsentUrl Url: /consent
+2020-07-14 14:21:24.736 +01:00 [DBG] Consent Return Url Parameter: returnUrl
+2020-07-14 14:21:24.736 +01:00 [DBG] Error Url: /home/error
+2020-07-14 14:21:24.736 +01:00 [DBG] Error Id Parameter: errorId
+2020-07-14 14:21:30.081 +01:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2020-07-14 14:21:30.098 +01:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryEndpoint
+2020-07-14 14:21:30.099 +01:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2020-07-14 14:21:30.107 +01:00 [DBG] Start discovery request
+2020-07-14 15:09:31.635 +01:00 [INF] Starting IdentityServer4 version 4.0.2+58e6bc8a94236b81d1d3c606c8295203c7c1c9e2
+2020-07-14 15:09:33.273 +01:00 [INF] Using the default authentication scheme idsrv for IdentityServer
+2020-07-14 15:09:33.275 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for authentication
+2020-07-14 15:09:33.276 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-in
+2020-07-14 15:09:33.276 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-out
+2020-07-14 15:09:33.277 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for challenge
+2020-07-14 15:09:33.277 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for forbid
+2020-07-14 15:09:36.021 +01:00 [DBG] Login Url: /Account/Login
+2020-07-14 15:09:36.028 +01:00 [DBG] Login Return Url Parameter: ReturnUrl
+2020-07-14 15:09:36.030 +01:00 [DBG] Logout Url: /Account/Logout
+2020-07-14 15:09:36.030 +01:00 [DBG] ConsentUrl Url: /consent
+2020-07-14 15:09:36.030 +01:00 [DBG] Consent Return Url Parameter: returnUrl
+2020-07-14 15:09:36.030 +01:00 [DBG] Error Url: /home/error
+2020-07-14 15:09:36.031 +01:00 [DBG] Error Id Parameter: errorId
+2020-07-14 15:11:22.171 +01:00 [INF] Starting IdentityServer4 version 4.0.2+58e6bc8a94236b81d1d3c606c8295203c7c1c9e2
+2020-07-14 15:11:23.796 +01:00 [INF] Using the default authentication scheme idsrv for IdentityServer
+2020-07-14 15:11:23.797 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for authentication
+2020-07-14 15:11:23.798 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-in
+2020-07-14 15:11:23.798 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-out
+2020-07-14 15:11:23.799 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for challenge
+2020-07-14 15:11:23.799 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for forbid
+2020-07-14 15:13:04.761 +01:00 [INF] Starting IdentityServer4 version 4.0.2+58e6bc8a94236b81d1d3c606c8295203c7c1c9e2
+2020-07-14 15:13:06.348 +01:00 [INF] Using the default authentication scheme idsrv for IdentityServer
+2020-07-14 15:13:06.348 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for authentication
+2020-07-14 15:13:06.349 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-in
+2020-07-14 15:13:06.349 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-out
+2020-07-14 15:13:06.349 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for challenge
+2020-07-14 15:13:06.350 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for forbid
+2020-07-14 15:13:22.283 +01:00 [DBG] Login Url: /Account/Login
+2020-07-14 15:13:22.291 +01:00 [DBG] Login Return Url Parameter: ReturnUrl
+2020-07-14 15:13:22.291 +01:00 [DBG] Logout Url: /Account/Logout
+2020-07-14 15:13:22.292 +01:00 [DBG] ConsentUrl Url: /consent
+2020-07-14 15:13:22.292 +01:00 [DBG] Consent Return Url Parameter: returnUrl
+2020-07-14 15:13:22.292 +01:00 [DBG] Error Url: /home/error
+2020-07-14 15:13:22.292 +01:00 [DBG] Error Id Parameter: errorId
+2020-07-14 15:13:22.351 +01:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2020-07-14 15:13:22.360 +01:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryEndpoint
+2020-07-14 15:13:22.361 +01:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2020-07-14 15:13:22.367 +01:00 [DBG] Start discovery request
+2020-07-14 15:13:23.343 +01:00 [DBG] Request path /.well-known/openid-configuration/jwks matched to endpoint type Discovery
+2020-07-14 15:13:23.348 +01:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryKeyEndpoint
+2020-07-14 15:13:23.348 +01:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
+2020-07-14 15:13:23.354 +01:00 [DBG] Start key discovery request
+2020-07-14 15:13:24.646 +01:00 [DBG] Request path /connect/token matched to endpoint type Token
+2020-07-14 15:13:24.672 +01:00 [DBG] Endpoint enabled: Token, successfully created handler: IdentityServer4.Endpoints.TokenEndpoint
+2020-07-14 15:13:24.672 +01:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2020-07-14 15:13:24.686 +01:00 [DBG] Start token request.
+2020-07-14 15:13:24.695 +01:00 [DBG] Start client validation
+2020-07-14 15:13:24.710 +01:00 [DBG] Start parsing Basic Authentication secret
+2020-07-14 15:13:24.715 +01:00 [DBG] Start parsing for secret in post body
+2020-07-14 15:13:24.752 +01:00 [DBG] Parser found secret: PostBodySecretParser
+2020-07-14 15:13:24.752 +01:00 [DBG] Secret id found: client
+2020-07-14 15:13:25.029 +01:00 [DBG] Secret validator success: HashedSharedSecretValidator
+2020-07-14 15:13:25.029 +01:00 [DBG] Client validation success
+2020-07-14 15:13:25.056 +01:00 [DBG] Start token request validation
+2020-07-14 15:13:25.071 +01:00 [DBG] Start client credentials token request validation
+2020-07-14 15:13:25.282 +01:00 [ERR] Scope api1 not found in store.
+2020-07-14 15:13:25.318 +01:00 [ERR] Invalid scopes requested, {"ClientId":"client","ClientName":null,"GrantType":"client_credentials","Scopes":null,"AuthorizationCode":null,"RefreshToken":null,"UserName":null,"AuthenticationContextReferenceClasses":null,"Tenant":null,"IdP":null,"Raw":{"grant_type":"client_credentials","scope":"api1","client_id":"client","client_secret":"***REDACTED***"},"$type":"TokenRequestValidationLog"}
+2020-07-14 15:17:41.251 +01:00 [INF] Starting IdentityServer4 version 4.0.2+58e6bc8a94236b81d1d3c606c8295203c7c1c9e2
+2020-07-14 15:17:42.716 +01:00 [INF] Using the default authentication scheme idsrv for IdentityServer
+2020-07-14 15:17:42.717 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for authentication
+2020-07-14 15:17:42.717 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-in
+2020-07-14 15:17:42.717 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-out
+2020-07-14 15:17:42.718 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for challenge
+2020-07-14 15:17:42.718 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for forbid
+2020-07-14 15:18:01.449 +01:00 [DBG] Login Url: /Account/Login
+2020-07-14 15:18:01.455 +01:00 [DBG] Login Return Url Parameter: ReturnUrl
+2020-07-14 15:18:01.455 +01:00 [DBG] Logout Url: /Account/Logout
+2020-07-14 15:18:01.456 +01:00 [DBG] ConsentUrl Url: /consent
+2020-07-14 15:18:01.456 +01:00 [DBG] Consent Return Url Parameter: returnUrl
+2020-07-14 15:18:01.456 +01:00 [DBG] Error Url: /home/error
+2020-07-14 15:18:01.457 +01:00 [DBG] Error Id Parameter: errorId
+2020-07-14 15:18:01.506 +01:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2020-07-14 15:18:01.515 +01:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryEndpoint
+2020-07-14 15:18:01.516 +01:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2020-07-14 15:18:01.521 +01:00 [DBG] Start discovery request
+2020-07-14 15:18:02.460 +01:00 [DBG] Request path /.well-known/openid-configuration/jwks matched to endpoint type Discovery
+2020-07-14 15:18:02.469 +01:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryKeyEndpoint
+2020-07-14 15:18:02.469 +01:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
+2020-07-14 15:18:02.551 +01:00 [DBG] Start key discovery request
+2020-07-14 15:18:03.758 +01:00 [DBG] Request path /connect/token matched to endpoint type Token
+2020-07-14 15:18:03.795 +01:00 [DBG] Endpoint enabled: Token, successfully created handler: IdentityServer4.Endpoints.TokenEndpoint
+2020-07-14 15:18:03.796 +01:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2020-07-14 15:18:03.813 +01:00 [DBG] Start token request.
+2020-07-14 15:18:03.825 +01:00 [DBG] Start client validation
+2020-07-14 15:18:03.849 +01:00 [DBG] Start parsing Basic Authentication secret
+2020-07-14 15:18:03.860 +01:00 [DBG] Start parsing for secret in post body
+2020-07-14 15:18:03.916 +01:00 [DBG] Parser found secret: PostBodySecretParser
+2020-07-14 15:18:03.917 +01:00 [DBG] Secret id found: client
+2020-07-14 15:18:04.350 +01:00 [DBG] Secret validator success: HashedSharedSecretValidator
+2020-07-14 15:18:04.351 +01:00 [DBG] Client validation success
+2020-07-14 15:18:04.387 +01:00 [DBG] Start token request validation
+2020-07-14 15:18:04.412 +01:00 [DBG] Start client credentials token request validation
+2020-07-14 15:18:04.753 +01:00 [ERR] Scope api1 not found in store.
+2020-07-14 15:18:04.797 +01:00 [ERR] Invalid scopes requested, {"ClientId":"client","ClientName":null,"GrantType":"client_credentials","Scopes":null,"AuthorizationCode":null,"RefreshToken":null,"UserName":null,"AuthenticationContextReferenceClasses":null,"Tenant":null,"IdP":null,"Raw":{"grant_type":"client_credentials","scope":"api1","client_id":"client","client_secret":"***REDACTED***"},"$type":"TokenRequestValidationLog"}

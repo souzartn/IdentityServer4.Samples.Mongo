@@ -15,12 +15,19 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "SelfHost": {
+    "IdentityServer": {
       "commandName": "Project",
+      "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "http://localhost:5000"
+      }
+    },
+    "SelfHost": {
+      "commandName": "Project",
+      "applicationUrl": "http://localhost:5000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
     }
   }
 }

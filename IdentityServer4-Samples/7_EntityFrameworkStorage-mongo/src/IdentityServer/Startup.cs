@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Bson.Serialization;
 using QuickstartIdentityServer;
@@ -21,7 +21,7 @@ namespace IdentityServer
     {
         public IConfigurationRoot Configuration { get; }
 
-        public Startup(IHostingEnvironment env)
+        public Startup(IWebHostEnvironment env)
         {
             var environmentVar = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             if (environmentVar == null)
@@ -64,13 +64,13 @@ namespace IdentityServer
 
 
             services.AddAuthentication()
-              .AddGoogle("Google", options =>
-              {
-                  options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+              //.AddGoogle("Google", options =>
+              //{
+              //    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
 
-                  options.ClientId = "434483408261-55tc8n0cs4ff1fe21ea8df2o443v2iuc.apps.googleusercontent.com";
-                  options.ClientSecret = "3gcoTrEDPPJ0ukn_aYYT6PWo";
-              })
+              //    options.ClientId = "434483408261-55tc8n0cs4ff1fe21ea8df2o443v2iuc.apps.googleusercontent.com";
+              //    options.ClientSecret = "3gcoTrEDPPJ0ukn_aYYT6PWo";
+              //})
               .AddOpenIdConnect("oidc", "OpenID Connect", options =>
               {
                   options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
@@ -89,7 +89,7 @@ namespace IdentityServer
 
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
             if (env.IsDevelopment())
@@ -100,11 +100,15 @@ namespace IdentityServer
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseStaticFiles();
+            app.UseRouting();
 
             app.UseIdentityServer();
             app.UseAuthentication();
-            app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+            });
 
 
             // --- Configure Classes to ignore Extra Elements (e.g. _Id) when deserializing ---
