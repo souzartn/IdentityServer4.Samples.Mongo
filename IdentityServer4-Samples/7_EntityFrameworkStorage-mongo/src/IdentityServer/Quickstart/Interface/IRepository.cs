@@ -11,12 +11,14 @@ namespace QuickstartIdentityServer.Quickstart.Interface
     /// </summary>
     public interface IRepository
     {
-        System.Linq.IQueryable<T> All<T>() where T : class, new();
-        IQueryable<T> Where<T>(System.Linq.Expressions.Expression<Func<T, bool>> expression) where T : class, new();
+        IQueryable<T> All<T>() where T : class, new();
+        IQueryable<T> Where<T>(Expression<Func<T, bool>> expression) where T : class, new();
         T Single<T>(Expression<Func<T, bool>> expression) where T : class, new();
         void Delete<T>(Expression<Func<T, bool>> expression) where T : class, new();
         void Add<T>(T item) where T : class, new();
         void Add<T>(IEnumerable<T> items) where T : class, new();
         bool CollectionExists<T>() where T : class, new();
+        //IEnumerable<T> Find<T>(Expression<Func<T, bool>> filter) where T : class, new();
+        
     }
 }

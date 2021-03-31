@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer4.Models;
 using IdentityServer4.Stores;
+using MongoDB.Driver;
 using QuickstartIdentityServer.Quickstart.Interface;
 
 namespace QuickstartIdentityServer.Quickstart.Store
@@ -25,6 +26,12 @@ namespace QuickstartIdentityServer.Quickstart.Store
             return Task.FromResult(result.AsEnumerable());
         }
 
+        public Task<IEnumerable<PersistedGrant>> GetAllAsync(PersistedGrantFilter filter)
+        {
+            var result = _dbRepository.Where<PersistedGrant>(i => i.SubjectId == filter.SubjectId);
+            return Task.FromResult(result.AsEnumerable());
+        }
+
         public Task<PersistedGrant> GetAsync(string key)
         {
             var result = _dbRepository.Single<PersistedGrant>(i => i.Key == key);
@@ -40,6 +47,12 @@ namespace QuickstartIdentityServer.Quickstart.Store
         public Task RemoveAllAsync(string subjectId, string clientId, string type)
         {
             _dbRepository.Delete<PersistedGrant>(i => i.SubjectId == subjectId && i.ClientId == clientId && i.Type == type);
+            return Task.FromResult(0);
+        }
+
+        public Task RemoveAllAsync(PersistedGrantFilter filter)
+        {
+            _dbRepository.Delete<PersistedGrant>(i => i.SubjectId == filter.SubjectId && i.ClientId == filter.ClientId && i.Type == filter.Type);
             return Task.FromResult(0);
         }
 

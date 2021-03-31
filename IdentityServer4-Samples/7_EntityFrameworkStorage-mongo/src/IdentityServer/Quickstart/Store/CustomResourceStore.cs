@@ -17,6 +17,11 @@ namespace QuickstartIdentityServer.Quickstart.Store
             _dbRepository = repository;
         }
 
+        private IEnumerable<ApiScope> GetAllApiScopes()
+        {
+            return _dbRepository.All<ApiScope>();
+        }
+
         private IEnumerable<ApiResource> GetAllApiResources()
         {
             return _dbRepository.All<ApiResource>();
@@ -36,7 +41,7 @@ namespace QuickstartIdentityServer.Quickstart.Store
 
         public Task<IEnumerable<ApiResource>> FindApiResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            var list = _dbRepository.Where<ApiResource>(a => a.Scopes.Any(s => scopeNames.Contains(s.Name)));
+            var list = _dbRepository.Where<ApiResource>(a => a.Scopes.Any(s => scopeNames.Contains(s)));
 
             return Task.FromResult(list.AsEnumerable());
         }
@@ -50,7 +55,7 @@ namespace QuickstartIdentityServer.Quickstart.Store
 
         public Resources GetAllResources()
         {
-            var result = new Resources(GetAllIdentityResources(), GetAllApiResources());
+            var result = new Resources(GetAllIdentityResources(), GetAllApiResources(), GetAllApiScopes());
             return result;
         }
 
@@ -61,8 +66,36 @@ namespace QuickstartIdentityServer.Quickstart.Store
 
         public Task<Resources> GetAllResourcesAsync()
         {
-            var result = new Resources(GetAllIdentityResources(), GetAllApiResources());
+            var result = new Resources(GetAllIdentityResources(), GetAllApiResources(), GetAllApiScopes());
             return Task.FromResult(result);
+        }
+
+        public Task<IEnumerable<IdentityResource>> FindIdentityResourcesByScopeNameAsync(IEnumerable<string> scopeNames)
+        {
+            var list = _dbRepository.Where<IdentityResource>(e => scopeNames.Contains(e.Name));
+
+            return Task.FromResult(list.AsEnumerable());
+        }
+
+        public Task<IEnumerable<ApiScope>> FindApiScopesByNameAsync(IEnumerable<string> scopeNames)
+        {
+            var list = _dbRepository.Where<ApiScope>(e => scopeNames.Contains(e.Name));
+
+            return Task.FromResult(list.AsEnumerable());
+        }
+
+        public Task<IEnumerable<ApiResource>> FindApiResourcesByScopeNameAsync(IEnumerable<string> scopeNames)
+        {
+            var list = _dbRepository.Where<ApiResource>(e => scopeNames.Contains(e.Name));
+
+            return Task.FromResult(list.AsEnumerable());
+        }
+
+        public Task<IEnumerable<ApiResource>> FindApiResourcesByNameAsync(IEnumerable<string> apiResourceNames)
+        {
+            var list = _dbRepository.Where<ApiResource>(e => apiResourceNames.Contains(e.Name));
+
+            return Task.FromResult(list.AsEnumerable());
         }
     }
 }
