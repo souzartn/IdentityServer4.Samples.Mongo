@@ -980,3 +980,29 @@ System.ArgumentException: An item with the same key has already been added. Key:
 2020-07-14 15:18:04.412 +01:00 [DBG] Start client credentials token request validation
 2020-07-14 15:18:04.753 +01:00 [ERR] Scope api1 not found in store.
 2020-07-14 15:18:04.797 +01:00 [ERR] Invalid scopes requested, {"ClientId":"client","ClientName":null,"GrantType":"client_credentials","Scopes":null,"AuthorizationCode":null,"RefreshToken":null,"UserName":null,"AuthenticationContextReferenceClasses":null,"Tenant":null,"IdP":null,"Raw":{"grant_type":"client_credentials","scope":"api1","client_id":"client","client_secret":"***REDACTED***"},"$type":"TokenRequestValidationLog"}
+2021-04-02 13:48:04.694 +01:00 [INF] Starting IdentityServer4 version 4.1.2+997a6cdd643e46cd5762b710c4ddc43574cbec2e
+2021-04-02 13:48:05.193 +01:00 [INF] Using the default authentication scheme idsrv for IdentityServer
+2021-04-02 13:48:05.193 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for authentication
+2021-04-02 13:48:05.193 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-in
+2021-04-02 13:48:05.193 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-out
+2021-04-02 13:48:05.193 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for challenge
+2021-04-02 13:48:05.193 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for forbid
+2021-04-02 13:48:28.391 +01:00 [FTL] Application startup exception
+System.Exception: Mongo Repository created/populated! Please restart you website, so Mongo driver will be configured  to ignore Extra Elements - e.g. IdentityServer "_id" 
+   at IdentityServer.Startup.InitializeDatabase(IApplicationBuilder app) in /Users/cto/Documents/Github/IdentityServer4.Samples.Mongo/IdentityServer4-Samples/7_EntityFrameworkStorage-mongo/src/IdentityServer/Startup.cs:line 163
+   at IdentityServer.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in /Users/cto/Documents/Github/IdentityServer4.Samples.Mongo/IdentityServer4-Samples/7_EntityFrameworkStorage-mongo/src/IdentityServer/Startup.cs:line 118
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor, Boolean wrapExceptions)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.<>c__DisplayClass4_0.<Build>b__0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.ConventionBasedStartup.Configure(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Mvc.Filters.MiddlewareFilterBuilderStartupFilter.<>c__DisplayClass0_0.<Configure>g__MiddlewareFilterBuilder|0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.HostFilteringStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.WebHost.BuildApplication()
+2021-04-02 13:51:54.950 +01:00 [INF] Starting IdentityServer4 version 4.1.2+997a6cdd643e46cd5762b710c4ddc43574cbec2e
+2021-04-02 13:51:55.472 +01:00 [INF] Using the default authentication scheme idsrv for IdentityServer
+2021-04-02 13:51:55.472 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for authentication
+2021-04-02 13:51:55.473 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-in
+2021-04-02 13:51:55.473 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for sign-out
+2021-04-02 13:51:55.473 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for challenge
+2021-04-02 13:51:55.473 +01:00 [DBG] Using idsrv as default ASP.NET Core scheme for forbid
