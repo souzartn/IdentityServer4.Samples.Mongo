@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Hosting;
 
 namespace MvcClient
 {
@@ -41,7 +42,7 @@ namespace MvcClient
                 });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -51,11 +52,11 @@ namespace MvcClient
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
+            app.UseRouting();
             app.UseAuthentication();
 
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+            app.UseEndpoints(mvc=>mvc.MapControllers());
         }
     }
 }
